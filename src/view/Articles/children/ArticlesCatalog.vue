@@ -140,7 +140,7 @@ export default {
             font-size: 16px;
             margin-bottom: 6px;
             span{
-                margin-left: 10px;
+                margin-left: 10px; 
             }
         }
         .top-list-item{
