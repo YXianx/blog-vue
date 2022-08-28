@@ -1,0 +1,37 @@
+// 默认的主题颜色
+
+// 导航栏字体  (root名称，参数)
+@navColor:var(--navColor,#4c4948);
+// 导航栏背景
+@navBg:var(--navBg,rgba(255,255,255,0.8));
+// 所有背景及博客卡片背景色
+@mainBg:var(--mainBg,linear-gradient(90deg,rgba(247,149,51,.1),rgba(243,112,85,.1) 15%,rgba(239,78,123,.1) 30%,rgba(161,102,171,.1) 44%,rgba(80,115,184,.1) 58%,rgba(16,152,173,.1) 72%,rgba(7,179,155,.1) 86%,rgba(109,186,130,.1)));
+@mainCardBg:var(--mainCardBg,#fff);
+// 所有背景及博客卡片字体颜色
+@mainColor:var(--mainColor,#4c4948); 
+
+// 文章代码框颜色
+@macBg:var(--macBg,#F6F8FA);
+@macColor:var(--macColor,#b4b7b8);
+@macToolBg:var(--macToolBg,#e6ebf1);
+@macLineColor:var(--macLineColor,rgba(144,164,174,.5)); 
+
+// 卡片阴影
+@shadowColor:var(--shadowColor,0 4px 8px 6px rgba(7,17,27,.06));
+
+:export {
+    name: "less";
+    navColor: @navColor;
+    navBg: @navBg;
+    
+    mainBg: @mainBg;
+    mainCardBg: @mainCardBg;
+    mainColor: @mainColor;
+    
+    macBg:@macBg;
+    macColor:@macColor;
+    macToolBg:@macToolBg;
+    macLineColor:@macLineColor;
+
+    shadowColor:@shadowColor;
+}

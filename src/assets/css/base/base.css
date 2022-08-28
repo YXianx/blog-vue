@@ -1,0 +1,86 @@
+/* 重置 标签风格统一 */
+@import "./normalize.css";
+
+/* 对页面初始化设置 */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* 根元素 相当于创建css的变量 */
+:root {
+  --color-text: #4c4948;
+  /* 高亮 */
+  --color-high-text: rgb(128, 200, 248);
+  /* 背景颜色 > 导航 */
+  --color-tint: #4c4948;
+  /* 背景色 */
+  --color-background: #fff;
+  --font-size: 14px;
+  --line-height: 1.5;
+
+  /* 打字css特效 */
+  --aniSpeed:4s;
+  --strLength:15;
+  --toWidth:19.2em;
+}
+
+body {
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Lato,Roboto,PingFang SC,Microsoft YaHei,sans-serif!important;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  background: var(--color-background);
+  color: var(--color-text);
+  width: 100vw;
+}
+
+a {
+  color: var(--color-tint);
+  text-decoration: none;
+}
+
+/* 清除浮动 */
+.clear-fix::after {
+  clear: both;
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+
+.clear-fix {
+  zoom: 1;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+/* 滚动条样式 */
+/* ::-webkit-scrollbar-thumb {
+  background-color: #49b1f5;
+  background-image: -webkit-linear-gradient(45deg,hsla(0,0%,100%,.4) 25%,transparent 0,transparent 50%,hsla(0,0%,100%,.4) 0,hsla(0,0%,100%,.4) 75%,transparent 0,transparent);
+  border-radius: 2em;
+} */
+
+
+@font-face {
+  font-family: 'iconfont';  /* Project id 3600780 */
+  src: url('//at.alicdn.com/t/c/font_3600780_c581ee2brol.woff2?t=1661675872721') format('woff2'),
+       url('//at.alicdn.com/t/c/font_3600780_c581ee2brol.woff?t=1661675872721') format('woff'),
+       url('//at.alicdn.com/t/c/font_3600780_c581ee2brol.ttf?t=1661675872721') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

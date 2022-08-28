@@ -1,0 +1,149 @@
+<template lang="">
+    <div class="banner" 
+         ref="bannerRef"
+         :style="{height:height}">
+        <!-- @keyfream实现动画 -->
+        <div class="info">
+            <div class="title" :class="leftTitle?'left':''">
+                <slot name="title"></slot>
+            </div>
+            <div class="other">
+                <slot name="other"></slot>
+            </div>
+        </div>
+        <div class="scroll-down" v-if="isScrollDown">
+            <i class="iconfont">&#xe626;</i>
+        </div>
+    </div>
+</template>
+<script>
+import {ref,onMounted} from 'vue'
+export default {
+    props:{
+        height:{
+            type:String,
+            default(){return "100vh"}
+        },
+        bannerUrl:{
+            type:String,
+            default(){return ""}
+        },
+        title:{
+            type:String,
+            default(){return "默认标题"}
+        },
+        isScrollDown:{
+            type:Boolean,
+            default(){
+                return true
+            }
+        },
+        backgroundScroll:{
+            type:Boolean,
+            default(){
+                return true
+            }
+        },
+        leftTitle:{
+            type:Boolean,
+            default(){
+                return false
+            }
+        }
+    },
+
+    setup(props){        
+        const bannerRef = ref(null)
+        const setBannerBg = ()=>{
+            bannerRef.value.style.background = `url(${props.bannerUrl})center center /cover no-repeat`
+            bannerRef.value.style.backgroundAttachment = props.backgroundScroll?"fixed":"none"
+        }
+
+        onMounted(()=>{
+            setBannerBg()
+        })
+        return {
+            bannerRef
+        }
+    }
+}
+</script>
+<style lang="less" scoped>
+    .banner{
+        position:relative;
+        width: 100%;
+        height: 100vh; 
+        .info{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: absolute;
+            width: 100%;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+
+            .title{
+                font-size: 1.3rem;
+                color: #fff;
+                letter-spacing: 0.2em;
+                animation: titleScale 1s ease;
+            }
+        }
+
+        .scroll-down{
+            position: absolute;
+            left: 50%;
+            bottom: 15px;
+
+             i{
+                display: inline-block;
+                font-size: 1.4em;
+                color: #f4f4f4;
+                font-weight: 700;
+                cursor: pointer;
+                animation: 2s scrollDown ease-out infinite;
+                animation-fill-mode: forwards;
+            }
+        }
+    }
+
+    @keyframes titleScale {
+        from{
+            transform: scale(0);
+        }
+        to{
+            transform: scale(1);
+        }
+    }
+    @keyframes scrollDown{
+        0%{
+            transform: translateY(-25px);
+            opacity: .5;
+        }
+        50%{
+            transform: translateY(0px);
+            opacity: 1;
+        }
+        100%{
+            transform: translateY(-25px);
+            opacity: .5;
+        }
+    }
+
+    @media (max-width:759px){
+        .info h1{
+            font-size: 26px;
+        }
+
+        .banner .info{
+            top: 43vh;
+        }
+
+        .title.left{
+            position: absolute;
+            left: 5%;
+            top: -1.5em;
+        }
+    }
+</style>
