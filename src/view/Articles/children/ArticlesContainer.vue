@@ -4,6 +4,10 @@
             <el-col :md="18" :xs="24">
                 <div class="article-wrapper v-card" :style="{background:getThemeConfig('mainCardBg')}">
                     <articles-content/>
+                    <articles-copyright/>
+                    <articles-operation/>
+                    <articles-reward/>
+                    <articles-pagination/>
                 </div>
             </el-col>
             <el-col :md=6 :xs="24">
@@ -19,13 +23,22 @@
     </div>
 </template>
 <script>
-import ArticlesContent from './children/ArticlesContent.vue'
-import ArticlesCatalog from './children/ArticlesCatalog.vue'
+import ArticlesContent from './ArticlesContent.vue'
+import ArticlesCatalog from './ArticlesCatalog.vue'
+import ArticlesCopyright from './ArticlesCopyright.vue';
+import ArticlesOperation from './ArticlesOperation.vue'
+import ArticlesReward from './ArticlesReward.vue'
+import ArticlesPagination from './ArticlesPagination.vue'
+
 import { useGetters } from '@/hook/common/useGetters';
 export default {    
     components:{
         ArticlesContent,
-        ArticlesCatalog
+        ArticlesCatalog,
+        ArticlesCopyright,
+        ArticlesOperation,
+        ArticlesReward,
+        ArticlesPagination
     },
 
     setup(){
@@ -41,7 +54,7 @@ export default {
         margin: 28px auto 0px auto;
 
         .article-wrapper{
-            padding: 10px;
+            padding: 8px 25px 15px 25px;
             margin-bottom: 28px;    
         }
         .right-container{

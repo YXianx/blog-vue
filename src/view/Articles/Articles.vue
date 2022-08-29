@@ -7,7 +7,7 @@
 <script>
 import {provide} from 'vue'
 import ArticlesBanner from './children/ArticlesBanner.vue';
-import ArticlesContainer from './ArticlesContainer.vue';
+import ArticlesContainer from './children/ArticlesContainer.vue';
 
 export default {
     // TODO:(前端)传递请求到的文章数据提取文章内容，通过provide & inject Articles -> ArticlesContent爷孙通信传递
