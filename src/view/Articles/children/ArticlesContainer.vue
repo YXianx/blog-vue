@@ -8,6 +8,13 @@
                     <articles-operation/>
                     <articles-reward/>
                     <articles-pagination/>
+                    <articles-recommend/>
+                    <hr/>
+                    <articles-comment :isShowIcon="true"/>
+                    <comment-input-wrapper/>
+                    
+                    <articles-comment :isShowIcon="false" :commentNum="2"/>
+                    <comment-tree/>
                 </div>
             </el-col>
             <el-col :md=6 :xs="24">
@@ -29,6 +36,11 @@ import ArticlesCopyright from './ArticlesCopyright.vue';
 import ArticlesOperation from './ArticlesOperation.vue'
 import ArticlesReward from './ArticlesReward.vue'
 import ArticlesPagination from './ArticlesPagination.vue'
+import ArticlesRecommend from './ArticlesRecommend.vue'
+import ArticlesComment from './ArticlesComment.vue'
+
+import CommentInputWrapper from '@component/common/CommentInputWrapper.vue'
+import CommentTree from '@component/common/CommentTree.vue'
 
 import { useGetters } from '@/hook/common/useGetters';
 export default {    
@@ -38,7 +50,12 @@ export default {
         ArticlesCopyright,
         ArticlesOperation,
         ArticlesReward,
-        ArticlesPagination
+        ArticlesPagination,
+        ArticlesRecommend,
+        ArticlesComment,
+
+        CommentInputWrapper,
+        CommentTree
     },
 
     setup(){

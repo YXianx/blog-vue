@@ -4,8 +4,8 @@
             <router-link to="/home">
                 <img src="../../../assets/img/blog/blogBg1.jpeg" alt="">
                 <div class="post-info">
-                    <div>上一篇</div>
-                    <div>博客技术总结</div>
+                    <div class="label">上一篇</div>
+                    <div class="title">博客技术总结</div>
                 </div>
             </router-link>
         </div>
@@ -14,8 +14,8 @@
             <router-link to="/home">
                 <img src="../../../assets/img/blog/blogBg2.jpeg" alt="">
                 <div class="post-info">
-                    <div>下一篇</div>
-                    <div>2022新的开始</div>
+                    <div class="label">下一篇</div>
+                    <div class="title">2022新的开始</div>
                 </div>
             </router-link>
         </div>
@@ -29,11 +29,20 @@ export default {
 <style lang="less" scoped>
     .articles-pagination{
         display: flex;
+        margin-top: 40px;
         .post{
             position: relative;
-            width: 50%;
-            height: 160px;
+            width: 100%;
+            height: 150px;
             overflow: hidden;
+            .label{
+                color: #eee;
+                font-size: 90%;   
+            }
+            .title{
+                color: #fff;
+                font-size: 93%;
+            }
             a{
                 position: absolute;
                 display: block;
@@ -45,31 +54,47 @@ export default {
                     object-fit:cover;
                     transition: all 400ms;
                 }
-                .post-info{
-                    line-height: 2;
-                    position: absolute;
-                    top: 50%;
-                    width: 100%;
-                    padding: 20px 40px;
-                    transform: translate(0px,-50%);
-                }
-            }
-            
-            &::after{
-                content: '';
-                position: absolute;
-                left: 0;
-                right: 0;
-                top: 0;
-                bottom: 0;
-                background-color:rgba(0, 0, 0, .6);
-            }
-            &:hover{
-                a{
+                &:hover{
                     img{
                         transform: scale(1.2);
                     }
                 }
+                .post-info{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    padding:20px 40px;
+                    line-height: 2;
+                    text-align: left;
+                    background-color: rgba(0,0,0,.6);
+                    transition: all 400ms;
+
+                    &:hover{
+                        background-color: rgba(0,0,0,0);
+                    }
+                }
+            }
+            &:nth-child(2){
+                .post-info{
+                    text-align: right;
+                }
+            }
+        }
+    }
+
+    @media (max-width:759px){
+        .post{
+            height: 100px !important;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            .post-info{
+                padding: 5px 10px!important;
             }
         }
     }

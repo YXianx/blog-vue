@@ -142,10 +142,10 @@ export default {
         z-index: 888;
         // background-color: red !important;
     }
-    .v-note-wrapper .v-note-panel .v-note-show .v-show-content,
-     .v-note-wrapper .v-note-panel .v-note-show .v-show-content-html{
-        padding: 0 !important;
-     }
+    // .v-note-wrapper .v-note-panel .v-note-show .v-show-content,
+    //  .v-note-wrapper .v-note-panel .v-note-show .v-show-content-html{
+    //     padding: 0 !important;
+    // }
     // 博客md内容文字运用动态样式
     .markdown-body{
         h1,h2,h3,h4,h5,h6,ul,li,p{

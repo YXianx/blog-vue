@@ -39,6 +39,11 @@ a {
   color: var(--color-tint);
   text-decoration: none;
 }
+hr{
+  margin: 40px auto;
+  border: 2px dashed #d2ebfd;
+  width: calc(100% - 4px);
+}
 
 /* 清除浮动 */
 .clear-fix::after {
@@ -62,6 +67,18 @@ a {
   float: right;
 }
 
+@keyframes iconflow{
+  0%{
+      transform: translateY(0px);
+  }
+  50%{
+      transform: translateY(-5px);
+  }
+  100%{
+      transform: translateY(0px);
+  }
+}
+
 /* 滚动条样式 */
 /* ::-webkit-scrollbar-thumb {
   background-color: #49b1f5;
@@ -70,11 +87,12 @@ a {
 } */
 
 
+/* CDN 服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
 @font-face {
   font-family: 'iconfont';  /* Project id 3600780 */
-  src: url('//at.alicdn.com/t/c/font_3600780_uaq55m15eg.woff2?t=1661775834999') format('woff2'),
-       url('//at.alicdn.com/t/c/font_3600780_uaq55m15eg.woff?t=1661775834999') format('woff'),
-       url('//at.alicdn.com/t/c/font_3600780_uaq55m15eg.ttf?t=1661775834999') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_3600780_j6hkf1mb6or.woff2?t=1661864940984') format('woff2'),
+       url('//at.alicdn.com/t/c/font_3600780_j6hkf1mb6or.woff?t=1661864940984') format('woff'),
+       url('//at.alicdn.com/t/c/font_3600780_j6hkf1mb6or.ttf?t=1661864940984') format('truetype');
 }
 
 .iconfont {
