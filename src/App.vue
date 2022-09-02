@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <nav-bar class="app-nav-bar"/>
+    <blog-nav-bar class="app-nav-bar"/>
 
     <router-view v-slot="props">
       <transition name="route" mode="out-in" appear>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import NavBar from './components/common/NavBar.vue';
+import BlogNavBar from './components/content/NavBar/BlogNavBar.vue';
 
 import {setTheme} from './assets/css/theme/theme' 
 import {useStore} from 'vuex'
@@ -19,7 +19,7 @@ import {useStore} from 'vuex'
 export default {
   name: 'App',
   components: {
-    NavBar,
+    BlogNavBar,
   },
 
   setup(){

@@ -4,45 +4,12 @@
                              ref="navRef"
                              :style="{background:inTop?'transparent':getThemeConfig('navBg')}">
             <div class="left-name">
-                <router-link to="/home" custom v-slot="props">
-                    <a class="name" @click="props.navigate"  :style="{color:inTop?'#fff':getThemeConfig('navColor')}">YXianx</a>
-                </router-link>
+                <slot name="left" :isShow="isShow" :inTop="inTop"></slot>
             </div>
             <div class="right-menu">
-                <router-link class="menu-item" to="/search" v-slot="props">
-                    <a @click="props.navigate" :style="{color:inTop?'#fff':getThemeConfig('navColor')}">
-                        <i class="iconfont" :style="{color:inTop?'#fff':getThemeConfig('navColor')}">&#xe752;</i>
-                        搜索
-                    </a>
-                </router-link>
-
-                <router-link class="menu-item" to="/home" v-slot="props">
-                    <a @click="props.navigate"  :style="{color:inTop?'#fff':getThemeConfig('navColor')}">
-                        <i class="iconfont"  :style="{color:inTop?'#fff':getThemeConfig('navColor')}">&#xe608;</i>
-                        首页
-                    </a>
-                </router-link>
-
-                <router-link class="menu-item" to="/search" v-slot="props">
-                    <a @click="props.navigate"  :style="{color:inTop?'#fff':getThemeConfig('navColor')}">
-                        <i class="iconfont"  :style="{color:inTop?'#fff':getThemeConfig('navColor')}">&#xe649;</i>
-                        关于
-                    </a>
-                </router-link>
-                
-                <div class="theme-switch">
-                    <el-switch
-                        v-model="switchState"
-                        class="mt-2"
-                        style="margin-left: 24px"
-                        inline-prompt
-                        :active-color="'#2c2c2c'"
-                        :inactive-color="'#f2f2f2'"
-                        :border-color="'#4C4D4F'"
-                        @change="themeStyleChange"
-                    />
-                </div>
+                <slot name="right" :isShow="isShow" :inTop="inTop"></slot>
             </div>
+
             <div class="right-menu-md">
                 <i class="iconfont" :style="{color:inTop?'#fff':getThemeConfig('navColor')}">&#xe613;</i>
                 <i class="iconfont" 
@@ -103,11 +70,10 @@
 </template>
 <script>
 import {ref} from 'vue'
-import { useStore } from 'vuex'
-
 import {useNavBarScroll} from '../../hook/index'
 import {useGetters} from '../../hook/common/useGetters'
-import {setTheme} from '../../assets/css/theme/theme'
+
+
 export default {
     setup(){
         // 1、获取导航栏位置状态
@@ -119,37 +85,17 @@ export default {
             isShowPopup.value = true
         }
 
-        // 3、主题切换
-        const store = useStore()    // useStore()钩子写在created生命周期时，才能拿到值，写在点击事件里是undefined
+        // 3、获取当前主题配置
         const {getThemeConfig} = useGetters("themeModule",["getThemeConfig"])
-        const switchState = ref(false)
-        switchState.value = localStorage.getItem("theme") === "dark" // 根据缓存的主题样式判断开关状态
-
-        const themeStyleChange = ()=>{
-            if(switchState.value){
-                setTheme("dark")
-            }
-            else{
-                setTheme("default")
-            }
-
-            store.dispatch("themeModule/localStorageAction")
-        }
-
-        
 
         return{
-            
             isShow,
             inTop,
 
             isShowPopup,
             menuClick,
 
-            
-            getThemeConfig,
-            switchState,
-            themeStyleChange
+            getThemeConfig
         }
     }
 }
@@ -168,54 +114,9 @@ export default {
         align-items: center;
         z-index: 999;
 
-        .left-name .name{
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .right-menu{
-            display: flex;
-            // justify-content: center;
-            align-items: center;
-            .menu-item{
-                position: relative;
-                margin-left: 20px;
-                font-size: 14px;
-
-                &::after{
-                    position: absolute;
-                    left: 0;
-                    bottom: -5px;
-                    content: "";
-                    width: 50px;
-                    height: 3px;
-                    background-color: rgb(128, 200, 248);
-                    border-radius: 4px;
-                    transform-origin: 0 50%;
-                    transform: scaleY(0);
-                    transition: all .3s ease-in-out;
-                }
-                &:hover::after{
-                    transform: scaleY(1);
-                }
-            }
-            .theme-switch{
-                display: flex;
-                justify-content: center;
-                color: @navColor;
-                align-items: center;
-                margin-left: 30px;
-                i{
-                    font-size: 15px;
-                }
-            }
-        }
-
         /* 移动端右侧菜单 */
         .right-menu-md{
             display: none;
-
             i{
                 font-size: 20px;
                 margin-left: 15px;

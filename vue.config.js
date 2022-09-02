@@ -22,7 +22,8 @@ module.exports = defineConfig({
     resolve:{
       alias:{
         "@img":resolve('src/assets/img'),
-        "@component":resolve('src/components')
+        "@component":resolve('src/components'),
+        "@hook":resolve('src/hook')
       }
     }
   }
