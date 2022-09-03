@@ -3,7 +3,7 @@
          ref="bannerRef"
          :style="{height:height}">
         <!-- @keyfream实现动画 -->
-        <div class="info">
+        <div class="info" :class="resetInfoHeight?'reset':''">
             <div class="title" :class="leftTitle?'left':''">
                 <slot name="title"></slot>
             </div>
@@ -21,6 +21,10 @@
 import {ref,onMounted} from 'vue'
 export default {
     props:{
+        resetInfoHeight:{
+            type:Boolean,
+            default(){return false}
+        },
         height:{
             type:String,
             default(){return "100vh"}
@@ -85,7 +89,7 @@ export default {
             transform: translate(-50%,-50%);
 
             .title{
-                font-size: 1.3rem;
+                font-size: 1rem;
                 color: #fff;
                 letter-spacing: 0.2em;
                 animation: titleScale 1s ease;
@@ -136,9 +140,12 @@ export default {
         .info h1{
             font-size: 26px;
         }
-
-        .banner .info{
+        // 兼容home及文章页内容显示
+        .banner .info.reset,.banner .info.reset{
             top: 43vh;
+        }
+        .banner .info{
+            top: 50%;
         }
 
         .title.left{

@@ -17,10 +17,18 @@
                                           :iconfont="'\ue6c6'" 
                                           :isSubMenu="true"
                                           :subMenu="[
-                                                {to:'/home',title:'归档',iconfont:'\ue6dd'},
-                                                {to:'/home',title:'分类',iconfont:'\ue6aa'},
-                                                {to:'/home',title:'标签',iconfont:'\ue606'}
+                                                {to:'/archives',title:'归档',iconfont:'\ue660'},
+                                                {to:'/categories',title:'分类',iconfont:'\ue6aa'},
+                                                {to:'/home',title:'标签',iconfont:'\ue615'}
                                           ]"/>
+                    <menu-item to="/search" :inTop="slotProps.inTop" 
+                                            title="娱乐" 
+                                            :iconfont="'\ue63a'" 
+                                            :isSubMenu="true"
+                                            :subMenu="[
+                                                {to:'/home',title:'照片',iconfont:'\ue7bf'},
+                                                {to:'/home',title:'说说',iconfont:'\ue61e'},
+                                            ]"/>
                     <menu-item to="/search" :inTop="slotProps.inTop" title="关于" :iconfont="'\ue649'"/>
                     
                     <div class="theme-switch">
@@ -40,8 +48,6 @@
         </nav-bar>
 </template>
 <script>
-// TODO:BlogNavBar组件中细化封装使用MenuItem减小组件体量
-
 import {ref} from 'vue'
 import {useStore} from 'vuex'
 import {useGetters} from'@hook/common/useGetters'

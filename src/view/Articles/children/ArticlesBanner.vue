@@ -5,6 +5,7 @@
             :bannerUrl="require('../../../assets/img/blog/blogcard.png')"
             :backgroundScroll="false"
             :leftTitle="true"
+            :resetInfoHeight="true"
     >
         <template #title>
             <div class="articles-title">

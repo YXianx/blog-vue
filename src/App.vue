@@ -7,11 +7,13 @@
         <component :is="props.Component"></component>
       </transition>
     </router-view>
+    <color-footer/>
   </div>
 </template>
 
 <script>
 import BlogNavBar from './components/content/NavBar/BlogNavBar.vue';
+import ColorFooter from './components/common/ColorFooter.vue';
 
 import {setTheme} from './assets/css/theme/theme' 
 import {useStore} from 'vuex'
@@ -20,6 +22,7 @@ export default {
   name: 'App',
   components: {
     BlogNavBar,
+    ColorFooter
   },
 
   setup(){

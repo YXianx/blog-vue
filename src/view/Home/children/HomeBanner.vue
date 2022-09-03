@@ -1,6 +1,8 @@
 <template lang="">
     <div class="home-banner">
-        <Banner :bannerUrl="require('../../../assets/img/home/banner.jpg')" title="贤先生 · 个人博客">
+        <Banner :bannerUrl="require('../../../assets/img/home/banner.jpg')" 
+                title="贤先生 · 个人博客"
+                :resetInfoHeight="true">
             <template #title>
                 <h1>贤先生 · 个人博客</h1>
             </template>

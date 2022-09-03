@@ -193,4 +193,9 @@ export default {
             }
         }
     }
+    @media (max-width:759px){
+        .articles-catalog{
+            display: none;
+        }
+    }
 </style>

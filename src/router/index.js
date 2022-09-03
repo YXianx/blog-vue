@@ -11,11 +11,25 @@ const routes = [
     },
     {
         path:"/search",
-        component:()=>import(/* webpackChunkName: "search-chunk" */"../view/Search/Search.vue")
+        component:()=>import("../view/Search/Search.vue")
     },
     {
         path:"/articles",
         component:()=>import(/* webpackChunkName: "articles-chunk" */"../view/Articles/Articles.vue")
+    },
+    {
+        path:"/archives",
+        component:()=>import("../view/Archives/Archives.vue")
+    },
+    {
+        path:"/categories",
+        component:()=>import("../view/Categories/Categories.vue"),
+        children:[
+            {
+                path:":id",
+                component:()=>import("../view/Categories/Categories.vue")
+            }
+        ]
     },
     {
         path:"/:pathMatch(.*)",
@@ -29,9 +43,12 @@ const router = createRouter({
 })
 
 // 导航守卫
-router.afterEach(()=>{
-    // 跳转到新路由后滚动条位置回到顶部
-    window.scrollTo(0,0)
+router.afterEach((to,from)=>{
+    // 当前路由为二级路由时不重新设置滚动条位置
+    if(to.matched.length <= 1){
+        // 跳转到新路由后滚动条位置回到顶部
+        window.scrollTo(0,0)
+    }
 })
 
 export default router

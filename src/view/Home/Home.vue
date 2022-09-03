@@ -2,19 +2,16 @@
     <div class="home">
         <home-banner/>
         <home-container class="container"/>
-        <color-footer/>
     </div>
 </template>
 <script>
 import HomeBanner from './children/HomeBanner.vue';
 import HomeContainer from './children/HomeContainer.vue'
-import ColorFooter from '../../components/common/ColorFooter.vue';
 
 export default {
     components:{
         HomeBanner,
         HomeContainer,
-        ColorFooter
     }
 }
 </script>

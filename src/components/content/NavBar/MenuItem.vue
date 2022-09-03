@@ -24,7 +24,6 @@
     </router-link>
 </template>
 <script>
-// TODO:对导航栏导航选项二级菜单进行封装
 import {ref} from 'vue'
 import { useGetters } from '@/hook/common/useGetters';
 
@@ -64,7 +63,6 @@ export default {
     },
 
     setup(props){
-        console.log(props.subMenu);
         const {getThemeConfig} = useGetters('themeModule',['getThemeConfig'])
         const isShowSubMenu = ref(false)
 
