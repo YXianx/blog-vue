@@ -12,11 +12,9 @@
     </div>
 </template> 
 <script> 
-import Banner from '@component/content/Banner.vue'
 import ArchivesContainer from './children/ArchivesContainer.vue'
 export default {
     components:{
-        Banner,
         ArchivesContainer
     }
 }

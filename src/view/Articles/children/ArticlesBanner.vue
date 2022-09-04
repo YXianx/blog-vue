@@ -37,11 +37,8 @@
     </banner>
 </template>
 <script>
-import Banner from '@/components/content/Banner.vue';
 export default {
-    components:{
-        Banner
-    }
+
 }
 </script>
 <style lang="less">

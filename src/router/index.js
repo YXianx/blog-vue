@@ -3,7 +3,7 @@ import { createRouter,createWebHistory } from "vue-router";
 const routes = [
     {
         path:"/",
-        redirect:"/articles"
+        redirect:"/home"
     },
     {
         path:"/home",
@@ -30,6 +30,14 @@ const routes = [
                 component:()=>import("../view/Categories/Categories.vue")
             }
         ]
+    },
+    {
+        path:"/tag",
+        component:()=>import("../view/TagCloud/TagCloud.vue")
+    },
+    {
+        path:"/albums",
+        component:()=>import("../view/Albums/Albums.vue")
     },
     {
         path:"/:pathMatch(.*)",

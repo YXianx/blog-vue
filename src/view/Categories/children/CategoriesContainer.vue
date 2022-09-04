@@ -1,18 +1,19 @@
 <template lang="">
-    <div class="categories-container" :style="!route.params.id?'padding:50px 40px;':''" :class="!route.params.id?'v-card':''">
-        <div class="categories-title" v-if="!route.params.id">分类 - 6</div>
-        <ul class="categories-list" v-if="!route.params.id">
-            <li class="categories-item" v-for="(item,index) in 6">
-                <router-link :to="'/categories/'+index">
-                    项目介绍
-                    <span>(3)</span>
-                </router-link>
-            </li>
-        </ul>
-        
+    <div class="container-view">
         <router-view>
-            <transition name="detail"> 
+            <transition name="detail" mode="out-in"> 
                 <component v-if="route.params.id" is="CategoriesDetail"></component>
+                <div v-else class="categories-container" :style="!route.params.id?'padding:50px 40px;':''" :class="!route.params.id?'v-card':''">
+                    <div class="categories-title">分类 - 6</div>
+                    <ul class="categories-list">
+                        <li class="categories-item" v-for="(item,index) in 6">
+                            <router-link :to="'/categories/'+index">
+                                项目介绍
+                                <span>(3)</span>
+                            </router-link>
+                        </li>
+                    </ul>
+                </div>
             </transition>
         </router-view>
     </div>
@@ -28,7 +29,7 @@ export default {
 
     setup(){
         const route = useRoute()
-        
+
         return {
             route
         }
@@ -43,6 +44,9 @@ export default {
         }
         .categories-list{
             margin: 0 5rem;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
             .categories-item{
                 position: relative;
                 padding: 10px 1.8rem 10px 0;
@@ -76,17 +80,28 @@ export default {
     @media (max-width:759px){
         .categories-container{
             padding: 0;
+            margin: 20px 5px 0px 5px;
+            .categories-list{
+                display: flex;
+                justify-content: space-around;
+                flex-wrap: wrap;
+                margin:0;
+                margin-top: 10px;
+                .categories-item{
+                    padding-right: 10px;
+                }
+            }
         }
     }
 
-    .detail-enter-active,
-    .detail-leave-active{
-        animation: .7s rightIn ease-out
-    }
-    .categories-enter-active,
-    .categories-leave-active{
+    .detail-enter-active{
         animation: .7s rightIn ease-out;
     }
+    .detail-leave-active{
+        animation: .7s rightIn ease;
+        animation-direction: reverse;
+    }   
+
     @keyframes rightIn {
         from{
             transform: translateX(100%);

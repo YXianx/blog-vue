@@ -19,14 +19,14 @@
                                           :subMenu="[
                                                 {to:'/archives',title:'归档',iconfont:'\ue660'},
                                                 {to:'/categories',title:'分类',iconfont:'\ue6aa'},
-                                                {to:'/home',title:'标签',iconfont:'\ue615'}
+                                                {to:'/tag',title:'标签',iconfont:'\ue615'}
                                           ]"/>
                     <menu-item to="/search" :inTop="slotProps.inTop" 
                                             title="娱乐" 
                                             :iconfont="'\ue63a'" 
                                             :isSubMenu="true"
                                             :subMenu="[
-                                                {to:'/home',title:'照片',iconfont:'\ue7bf'},
+                                                {to:'/albums',title:'照片',iconfont:'\ue7bf'},
                                                 {to:'/home',title:'说说',iconfont:'\ue61e'},
                                             ]"/>
                     <menu-item to="/search" :inTop="slotProps.inTop" title="关于" :iconfont="'\ue649'"/>
