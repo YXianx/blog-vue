@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="container-view">
+    <div class="categories-view">
         <router-view>
             <transition name="detail" mode="out-in"> 
                 <component v-if="route.params.id" is="CategoriesDetail"></component>

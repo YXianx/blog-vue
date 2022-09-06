@@ -27,9 +27,10 @@
                                             :isSubMenu="true"
                                             :subMenu="[
                                                 {to:'/albums',title:'照片',iconfont:'\ue7bf'},
-                                                {to:'/home',title:'说说',iconfont:'\ue61e'},
+                                                {to:'/talks',title:'说说',iconfont:'\ue61e'},
                                             ]"/>
-                    <menu-item to="/search" :inTop="slotProps.inTop" title="关于" :iconfont="'\ue649'"/>
+                    <menu-item to="/links" :inTop="slotProps.inTop" title="友链" :iconfont="'\ue614'"/>
+                    <menu-item to="/about" :inTop="slotProps.inTop" title="关于" :iconfont="'\ue649'"/>
                     
                     <div class="theme-switch">
                         <el-switch

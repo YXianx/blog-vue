@@ -37,7 +37,25 @@ const routes = [
     },
     {
         path:"/albums",
-        component:()=>import("../view/Albums/Albums.vue")
+        component:()=>import("../view/Albums/Albums.vue"),
+        children:[
+            {
+                path:":id",
+                component:()=>import("../view/Albums/Albums.vue")
+            }
+        ]
+    },
+    {
+        path:"/talks",
+        component:()=>import("../view/Talks/Talks.vue")
+    },
+    {
+        path:"/links",
+        component:()=>import("../view/Links/Links.vue")
+    },
+    {
+        path:"/about",
+        component:()=>import("../view/About/About.vue")
     },
     {
         path:"/:pathMatch(.*)",

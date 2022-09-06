@@ -87,6 +87,7 @@ export default {
     .tag-container{
         padding: 50px 40px;
         text-align: center;
+        animation: containerAni 700ms ease-out;
         .title{
             font-size: 36px;
             line-height: 2;
