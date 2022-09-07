@@ -10,7 +10,7 @@
             
             <template #right="slotProps">
                 <div class="right-menu">
-                    <menu-item to="/search" :inTop="slotProps.inTop" title="搜索" :iconfont="'\ue752'"/>
+                    <menu-item :isRouter="false" @click="spotLightClick" :inTop="slotProps.inTop" title="搜索" :iconfont="'\ue752'" />
                     <menu-item to="/home" :inTop="slotProps.inTop" title="首页" :iconfont="'\ue608'"/>
                     <menu-item to="/home" :inTop="slotProps.inTop" 
                                           title="发现" 
@@ -49,7 +49,7 @@
         </nav-bar>
 </template>
 <script>
-import {ref} from 'vue'
+import {ref,emit} from 'vue'
 import {useStore} from 'vuex'
 import {useGetters} from'@hook/common/useGetters'
 
@@ -57,13 +57,15 @@ import NavBar from '../../common/NavBar.vue'
 import MenuItem from './MenuItem.vue'
 
 import {setTheme} from '../../../assets/css/theme/theme'
+import emitter from '../../../eventbus/index.js'
 export default {
+    emit:["spotLightClick"],
     components:{
         NavBar,
         MenuItem
     },
 
-    setup(){
+    setup(props,{emit}){
         // 1、主题切换
         const store = useStore()    // useStore()钩子写在created生命周期时，才能拿到值，写在点击事件里是undefined
         const {getThemeConfig} = useGetters("themeModule",["getThemeConfig"])
@@ -80,11 +82,18 @@ export default {
 
             store.dispatch("themeModule/localStorageAction")
         }
+
+        // 2、聚焦搜索
+        const spotLightClick = ()=>{
+            emitter.emit("spotLightClick")
+        }
         return {
             getThemeConfig,
 
             switchState,
-            themeStyleChange
+            themeStyleChange,
+
+            spotLightClick
         }
     }
 }

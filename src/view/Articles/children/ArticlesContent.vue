@@ -55,16 +55,14 @@ export default {
                     codeView.className = "code-view"
                     codeELHeight.value = codeView.offsetHeight
 
-                    // TODO:(待解决)行号显示有点小偏差，需要解决
                     // 4、实现行号 
                     const lineNumEL = document.createElement("div")
-                    lineNumEL.setAttribute("style",`height:${codeHeight}px`)
-                    let num = ""
-                    for(let i = 1;i < Math.ceil(codeHeight / 20) + 1;i++){
-                        num += `${i}\n`
+                    for(let i = 1;i < Math.ceil(codeHeight / 20)+2;i++){
+                        let spanEL = document.createElement('span')
+                        spanEL.innerText = i
+                        lineNumEL.appendChild(spanEL)
                     }
                     lineNumEL.className = "el-line-num"
-                    lineNumEL.innerText = num
                     codeView.appendChild(lineNumEL)
                     
                     // 5、自定义新的代码区域 从原本的pre->code层级关系变成pre->.code-view，放入自定义的代码容器
@@ -78,7 +76,7 @@ export default {
                     // 6、自定义tool工具栏 (如果采用模版字符串方式创建会导致事件加不上！)
                     const macToolEL = document.createElement('div')
                     macToolEL.className = "mac-tool"
-                    macToolEL.setAttribute("style",`width:${preWidth}px`)
+                    // macToolEL.setAttribute("style",`width:${preWidth}px`)
                     // 6-1、自定义mac-icon样式按钮及复制按钮
                     const iconRedEL = document.createElement('span')
                     const iconYellowEL = document.createElement('span')
@@ -142,10 +140,7 @@ export default {
         z-index: 888;
         // background-color: red !important;
     }
-    // .v-note-wrapper .v-note-panel .v-note-show .v-show-content,
-    //  .v-note-wrapper .v-note-panel .v-note-show .v-show-content-html{
-    //     padding: 0 !important;
-    // }
+
     // 博客md内容文字运用动态样式
     .markdown-body{
         h1,h2,h3,h4,h5,h6,ul,li,p{
@@ -181,75 +176,79 @@ export default {
         .hljs-string{
             color: #91b859 !important;
         }
-    }
-    .code-view .el-line-num{
-        // position:absolute;
-        // top: 2.15em;
-        margin-top: 2.5em;
-        display: inline-block !important;
-        line-height: 20px !important;
-        padding: 0 10px;
-        color: @macLineColor !important;
 
-        .hljs-number{
+        .el-line-num{
+            margin: 2.5em 0 1em 0;
+            display: inline-block !important;
+            line-height: 20px !important;
+            padding: 0 10px;
             color: @macLineColor !important;
+            span{
+                display: block;
+            }
+            .hljs-number{
+                color: @macLineColor !important;
+            }
         }
-    }
-    .code-view .code-box{
-        // 内容可选中
-        user-select: text !important;
 
-        position:absolute;
-        top: 3em;
-        padding: 0 10px;
-        
-        display:inline-block !important;
-        width:calc(100%-50px)!important;
-        vertical-align: top !important;
-    }
-    
+        .code-box{
+            // 内容可选中
+            user-select: text !important;
 
-    .code-view .mac-tool{
-        position: absolute !important;
-        left: 0;
-        top: 0;
+            position:absolute;
+            top: 3em;
+            padding: 0 10px;
+            line-height: 20px;
+            
+            display:inline-block !important;
+            width:calc(100%-50px)!important;
+            vertical-align: top !important;
+        }
 
-        display: inline-block !important;
-        height: 2.15em !important;
-        background-color: @macToolBg !important;
-
-        span{
+        .mac-tool{
             position: absolute !important;
-            transform: translate(-50%,-50%);
-            top: 50%;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-        .mac-icon-red {
-            left: 20px;
-            background-color: #fc625d !important;
-        }
-        .mac-icon-yellow {
-            left: 40px;       
-            background-color: #F3BF59 !important;
-        }
+            left: 0;
+            top: 0;
 
-        .mac-icon-green {
-            left: 60px;
-            background-color: #68CA5D !important;
-        }
-        .copy-icon{
-            position: absolute;
-            right: 5px;
-            top: 50%;
-            transform: translate(-50%,-50%);
-            transition: color 300ms;
-            font-weight: 700;
-            cursor: pointer;
 
-            &:hover{
-                color: var(--color-high-text);
+            display: inline-block !important;
+            width: 100%;
+            height: 2.15em !important;
+            background-color: @macToolBg !important;
+
+            span{
+                position: absolute !important;
+                transform: translate(-50%,-50%);
+                top: 50%;
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+            }
+            .mac-icon-red {
+                left: 20px;
+                background-color: #fc625d !important;
+            }
+            .mac-icon-yellow {
+                left: 40px;       
+                background-color: #F3BF59 !important;
+            }
+
+            .mac-icon-green {
+                left: 60px;
+                background-color: #68CA5D !important;
+            }
+            .copy-icon{
+                position: absolute;
+                right: 5px;
+                top: 50%;
+                transform: translate(-50%,-50%);
+                transition: color 300ms;
+                font-weight: 700;
+                cursor: pointer;
+
+                &:hover{
+                    color: var(--color-high-text);
+                }
             }
         }
     }

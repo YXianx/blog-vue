@@ -88,13 +88,13 @@ hr{
 
 
 /* CDN 服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
-/* CDN 服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
 @font-face {
   font-family: 'iconfont';  /* Project id 3600780 */
-  src: url('//at.alicdn.com/t/c/font_3600780_u37lgewu76o.woff2?t=1662436703850') format('woff2'),
-       url('//at.alicdn.com/t/c/font_3600780_u37lgewu76o.woff?t=1662436703850') format('woff'),
-       url('//at.alicdn.com/t/c/font_3600780_u37lgewu76o.ttf?t=1662436703850') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_3600780_19j2x3ulhbz.woff2?t=1662522194531') format('woff2'),
+       url('//at.alicdn.com/t/c/font_3600780_19j2x3ulhbz.woff?t=1662522194531') format('woff'),
+       url('//at.alicdn.com/t/c/font_3600780_19j2x3ulhbz.ttf?t=1662522194531') format('truetype');
 }
+
 .iconfont {
   font-family: "iconfont" !important;
   font-size: 16px;

@@ -1,5 +1,5 @@
 <template lang="">
-    <router-link :to="to" v-slot="props" custom>
+    <router-link :to="to" v-slot="props" custom v-if="isRouter">
         <!-- 一级菜单 -->
         <div class="menu-item" 
              @click="props.navigate" 
@@ -22,6 +22,26 @@
             </transition>
         </div>
     </router-link>
+    <div class="menu-item"
+            v-else 
+            @mouseenter="menuMoveEnter"
+            @mouseleave="menuMoveLeave"
+            :style="{color:inTop?'#fff':getThemeConfig('navColor')}">
+        <i class="iconfont" :style="{color:inTop?'#fff':getThemeConfig('navColor')}">{{iconfont}}</i>
+        {{title}}
+        <i v-if="isSubMenu" class="iconfont" :style="{color:inTop?'#fff':getThemeConfig('navColor')}">&#xe626;</i>
+        <!-- 二级菜单 -->
+        <transition name="submenu">
+            <ul v-if="isSubMenu && isShowSubMenu" class="menus-submenu">
+                <li v-for="(item,index) in subMenu">
+                    <router-link :to="item.to">
+                        <i class="iconfont">{{item.iconfont}}</i>
+                        {{item.title}}
+                    </router-link>
+                </li>
+            </ul>
+        </transition>
+    </div>
 </template>
 <script>
 import {ref} from 'vue'
@@ -29,6 +49,10 @@ import { useGetters } from '@/hook/common/useGetters';
 
 export default {
     props:{
+        isRouter:{
+            type:Boolean,
+            default(){return true}
+        },
         to:{
             type:String,
             default(){return '/home'}

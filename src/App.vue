@@ -1,8 +1,8 @@
 <template>
   <div class="app">
     <blog-nav-bar class="app-nav-bar"/>
-
-    <router-view v-slot="props">
+    <spot-light :isShow="spotLightState"/>
+    <router-view v-slot="props" @click="cancelSpotLight">
       <transition name="route" mode="out-in" appear>
         <component :is="props.Component"></component>
       </transition>
@@ -12,17 +12,21 @@
 </template>
 
 <script>
-import BlogNavBar from './components/content/NavBar/BlogNavBar.vue';
-import ColorFooter from './components/common/ColorFooter.vue';
-
-import {setTheme} from './assets/css/theme/theme' 
+import {ref} from 'vue'
 import {useStore} from 'vuex'
 
+import BlogNavBar from './components/content/NavBar/BlogNavBar.vue';
+import ColorFooter from './components/common/ColorFooter.vue';
+import SpotLight from './components/common/SpotLight.vue'
+
+import {setTheme} from './assets/css/theme/theme' 
+import emitter from './eventbus/index.js'
 export default {
   name: 'App',
   components: {
     BlogNavBar,
-    ColorFooter
+    ColorFooter,
+    SpotLight
   },
 
   setup(){
@@ -33,8 +37,18 @@ export default {
     const store = useStore()
     store.dispatch("themeModule/localStorageAction")
 
-    return{
+    // 3、聚焦搜索框
+    const spotLightState = ref(false)
+    const cancelSpotLight = ()=>{
+      spotLightState.value = false
+    }
+    emitter.on("spotLightClick",()=>{
+      spotLightState.value = true
+    })
 
+    return{
+      spotLightState,
+      cancelSpotLight
     }
   }
 }

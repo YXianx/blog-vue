@@ -10,16 +10,15 @@
                 <slot name="right" :isShow="isShow" :inTop="inTop"></slot>
             </div>
 
+            <!-- 移动端右侧菜单 -->
             <div class="right-menu-md">
-                <i class="iconfont" :style="{color:inTop?'#fff':getThemeConfig('navColor')}">&#xe613;</i>
+                <i class="iconfont" :style="{color:inTop?'#fff':getThemeConfig('navColor')}" @click="spotLightClick">&#xe613;</i>
                 <i class="iconfont" 
                    :style="{color:inTop?'#fff':getThemeConfig('navColor')}"
                    @click="menuClick">
                    &#xe64d;
                 </i>
             </div>
-            
-            <!-- 移动端右侧菜单 -->
             <van-popup v-model:show="isShowPopup" position="right" :style="{width:'250px',height: '100vh' }">
                 <div class="blog-menu">
                     <div class="blogger-info">
@@ -72,7 +71,7 @@
 import {ref} from 'vue'
 import {useNavBarScroll} from '../../hook/index'
 import {useGetters} from '../../hook/common/useGetters'
-
+import emitter from '../../eventbus/index.js'
 
 export default {
     setup(){
@@ -88,6 +87,10 @@ export default {
         // 3、获取当前主题配置
         const {getThemeConfig} = useGetters("themeModule",["getThemeConfig"])
 
+        // 4、聚焦搜索按钮点击
+        const spotLightClick  = ()=>{
+            emitter.emit("spotLightClick")
+        }
         return{
             isShow,
             inTop,
@@ -95,7 +98,9 @@ export default {
             isShowPopup,
             menuClick,
 
-            getThemeConfig
+            getThemeConfig,
+
+            spotLightClick
         }
     }
 }
