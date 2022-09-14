@@ -16,7 +16,7 @@
         <div class="article-list" v-if="mode === 'articles'">
             <div class="article-item" v-for="item in 5">
                 <router-link to="/articles">
-                    <img src="../../../assets/img/blog/blogcard.png" alt=""/>
+                    <img :src="IMG_URL + 'blog_bg_1.webp'" alt=""/>
                 </router-link>
                 <div class="content">
                     <router-link to="/articles">
@@ -29,11 +29,13 @@
     </div>
 </template>
 <script>
+// TODO:递归方式重构目录导航，参考评论区组件的递归树方式
 import { ref,reactive,onMounted,nextTick,watchEffect,watch } from 'vue';
 
 import {useWinScroll} from '../../../hook/index' 
 import {useScrollAnimate} from '../../../hook/index'
 
+import {IMG_URL} from '@const/index.js'
 export default {
     props:{
         title:{
@@ -125,7 +127,9 @@ export default {
             catalogList,
             currentIndex,
 
-            scrollY
+            scrollY,
+
+            IMG_URL
         }
     }
 }

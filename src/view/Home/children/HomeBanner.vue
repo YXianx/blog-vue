@@ -1,6 +1,6 @@
 <template lang="">
     <div class="home-banner">
-        <banner :bannerUrl="require('@img/tag/banner.jpg')" 
+        <banner :bannerUrl="IMG_URL+'home_banner.webp'" 
                 title="贤先生 · 个人博客"
                 :resetInfoHeight="true">
             <template #title>
@@ -14,9 +14,17 @@
 </template>
 <script>
 import WriteTextAni from '../../../components/common/WriteTextAni.vue';
+import {IMG_URL} from '@const/index.js'
+
 export default {
     components:{
         WriteTextAni
+    },
+
+    setup(){
+        return {
+            IMG_URL
+        }
     }
 }
 </script>

@@ -3,7 +3,7 @@
         <banner height="400px"
                 :isScrollDown="false"
                 :backgroundScroll="false"
-                :bannerUrl="require('@img/tag/banner.jpg')">
+                :bannerUrl="IMG_URL + 'home_banner.webp'">
             <template #title>
                 <h1>标签</h1>
             </template>
@@ -20,6 +20,7 @@
 </template>
 <script>
 import {computed} from 'vue'
+import {IMG_URL} from '@const/index.js'
 export default {
     setup(){
         const tags = [
@@ -78,7 +79,9 @@ export default {
 
         return {
             tags,
-            randomFontSize
+            randomFontSize,
+
+            IMG_URL
         }
     }
 }

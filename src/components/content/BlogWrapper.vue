@@ -24,8 +24,10 @@
             </a>
         </div>
     </div>
-</template>
+</template> 
 <script>
+import {IMG_URL} from '@const/index.js'
+ 
 export default {
     props:{
         // TODO:(后端)首页博主卡片展示，需要 wrapperData 中的数据渲染组件
@@ -35,7 +37,7 @@ export default {
                 return {
                     blogger:"贤先生x",
                     phrase:"超爱吃白切鸡",
-                    bloggerHeadUrl:require("../../assets/img/user/head.png"),
+                    bloggerHeadUrl:IMG_URL + 'user_head.webp',
                     infoData:[
                         {
                             name:"文章",

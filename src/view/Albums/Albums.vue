@@ -2,7 +2,7 @@
     <div class="albums">
         <banner :isScrollDown="false"
                 height="400px"
-                :bannerUrl="require('@img/albums/banner.jpg')"
+                :bannerUrl="IMG_URL + 'albums_banner.webp'"
                 :backgroundScroll="false">
             <template #title>
                 <h1>相册</h1>
@@ -17,7 +17,7 @@
                             <router-link :to="`/albums/${index+1}`" v-slot="slotProps" custom>
                                 <div class="albums-wrapper" @click="slotProps.navigate">
                                     <div class="albums-title">简约风壁纸</div>
-                                    <img src="@img/other/background.jpg" alt="">
+                                    <img :src="IMG_URL + 'albums_card_cover.webp'" alt="">
                                 </div>
                             </router-link>
                         </el-col>
@@ -39,6 +39,8 @@
 import {ref,watch} from 'vue'
 import {useRoute} from 'vue-router'
 import { useWatchRoute } from '@/hook'
+
+import {IMG_URL} from '@const/index.js'
 export default {
     setup(){
         // hook：watch监听二级路由进入同个组件
@@ -55,14 +57,14 @@ export default {
 
         const url = require("@img/other/1.jpg")
         const srcList = [
-            require("@img/other/1.jpg"), 
-            require("@img/other/2.jpg"),
-            require("@img/other/3.jpg"),
-            require("@img/other/4.jpg"),
-            require("@img/other/5.jpg"),
-            require("@img/other/6.jpg"),
-            require("@img/other/7.jpg"),
-            require("@img/other/8.jpg"),
+            IMG_URL + "tag_bg_1.webp",
+            IMG_URL + "tag_bg_2.webp",
+            IMG_URL + "tag_bg_3.webp",
+            IMG_URL + "tag_bg_4.webp",
+            IMG_URL + "tag_bg_5.webp",
+            IMG_URL + "tag_bg_6.webp",
+            IMG_URL + "tag_bg_7.webp",
+            IMG_URL + "tag_bg_8.webp"
         ]
         // TODO:(待解决)当前简单实现了图片点击浏览当前大图，但是顺序还是默认的srcList顺序，上一张下一张是乱的
         const ImageViewClick = (index)=>{
@@ -76,7 +78,9 @@ export default {
 
             url,
             srcList,
-            ImageViewClick
+            ImageViewClick,
+
+            IMG_URL
         }
     }
 }

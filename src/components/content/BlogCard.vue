@@ -2,7 +2,7 @@
     <div class="blog-card v-card">
         <div :class="imgOrder?'left-radius':'right-radius'">
             <router-link to="/articles">
-                <img src="../../assets/img/blog/blogcard.png" alt="">
+                <img :src="IMG_URL + 'blog_bg_3.webp'" alt="">
                 <!-- <img src="" alt=""> -->
             </router-link>
         </div>
@@ -29,6 +29,7 @@
     </div>
 </template>
 <script>
+import {IMG_URL} from '@const/index.js'
 export default {
     props:{
         imgOrder:{
@@ -64,7 +65,9 @@ export default {
     },
 
     setup(props){
-        
+        return {
+            IMG_URL
+        }
     }
 }
 </script>
@@ -77,6 +80,7 @@ export default {
         margin-top:20px;
         border-radius: 12px 8px 8px 12px !important;
         transition: all .4s ease;
+        animation: showCard 1s ease;
 
         i,a,div{
             color: @mainColor;
@@ -212,6 +216,16 @@ export default {
         }
         .blog-card:hover .right-radius a img{
             transform: none;
+        }
+    }
+
+    // 卡片出现动画
+    @keyframes showCard{
+        from{
+            transform: scale(0);
+        }
+        to{
+            transform: scale(1);
         }
     }
 </style>

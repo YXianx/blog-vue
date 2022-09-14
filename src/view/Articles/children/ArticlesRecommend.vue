@@ -7,7 +7,7 @@
         <div class="recommend-list">
             <div class="recommend-item" v-for="item in 6">
                 <router-link to="/home">
-                    <img src="@img/blog/blogBg1.jpeg" alt="">
+                    <img :src="IMG_URL + 'blog_bg_3.webp'" alt="">
                     <div class="recommend-info">
                         <div class="recommend-date">
                             <i class="iconfont">&#xeb3f;</i>
@@ -23,8 +23,13 @@
     </div>
 </template>
 <script>
+import {IMG_URL} from '@const/index.js'
 export default {
-    
+    setup(){
+        return {
+            IMG_URL
+        }
+    }
 }
 </script>
 <style lang="less" scoped>

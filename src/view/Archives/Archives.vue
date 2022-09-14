@@ -1,7 +1,7 @@
 <template lang="">
     <div class="archives">
         <banner height="400px" 
-                :bannerUrl="require('@img/archives/banner.jpg')"
+                :bannerUrl="IMG_URL + 'archives_banner.webp'"
                 :isScrollDown="false"
                 :backgroundScroll="false">
             <template #title>
@@ -13,9 +13,15 @@
 </template> 
 <script> 
 import ArchivesContainer from './children/ArchivesContainer.vue'
+import {IMG_URL} from '@const/index.js'
 export default {
     components:{
         ArchivesContainer
+    },
+    setup(){
+        return {
+            IMG_URL
+        }
     }
 }
 </script>

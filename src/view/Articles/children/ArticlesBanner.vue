@@ -2,7 +2,7 @@
     <banner class="banner" 
             height="400px" 
             :isScrollDown="false"
-            :bannerUrl="require('../../../assets/img/blog/blogcard.png')"
+            :bannerUrl="IMG_URL + 'blog_bg_3.webp'"
             :backgroundScroll="false"
             :leftTitle="true"
             :resetInfoHeight="true"
@@ -37,8 +37,13 @@
     </banner>
 </template>
 <script>
+import {IMG_URL} from '@const/index.js'
 export default {
-
+    setup(){
+        return {
+            IMG_URL
+        }
+    }
 }
 </script>
 <style lang="less">

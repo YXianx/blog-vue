@@ -1,6 +1,6 @@
 <template lang="">
     <div class="about">
-        <banner :bannerUrl="require('@img/about/banner.jpg')"
+        <banner :bannerUrl="IMG_URL + 'about_banner.webp'"
                 height="400px"
                 :backgroundScroll="false"
                 :isScrollDown="false">
@@ -38,8 +38,13 @@
     </div>
 </template>
 <script>
+import {IMG_URL} from '@const/index.js'
 export default {
-    
+    setup(){
+        return {
+            IMG_URL
+        }
+    }
 }
 </script>
 <style lang="less">

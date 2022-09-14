@@ -1,6 +1,6 @@
 <template lang="">
     <div class="categories">
-        <banner :bannerUrl="require('@img/categories/detail-banner.jpg')"
+        <banner :bannerUrl="IMG_URL + 'categories_banner.webp'"
                 height="400px"
                 :isScrollDown="false"
                 :backgroundScroll="false">
@@ -13,13 +13,15 @@
 </template>
 <script>
 import CategoriesContainer from './children/CategoriesContainer.vue'
+import {IMG_URL} from '@const/index.js'
+
 export default {
     components:{
         CategoriesContainer
     },
     setup(){
         return {
-            
+            IMG_URL
         }
     }
 }

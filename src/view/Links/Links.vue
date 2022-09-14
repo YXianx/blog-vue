@@ -1,6 +1,6 @@
 <template lang="">
-    <div>
-        <banner :bannerUrl="require('@img/links/banner.jpg')"
+    <div class="links">
+        <banner :bannerUrl="IMG_URL + 'links_new_banner.webp'"
                 height="400px"
                 :backgroundScroll="false"
                 :isScrollDown="false">
@@ -13,9 +13,16 @@
 </template>
 <script>
 import LinksContainer from './children/LinksContainer.vue';
+import {IMG_URL} from '@const/index.js'
+
 export default {
     components:{
         LinksContainer
+    },
+    setup(){
+        return {
+            IMG_URL
+        }
     }
 }
 </script>

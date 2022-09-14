@@ -3,7 +3,7 @@
         <div class="article-item v-card">
             <router-link to="/home" v-slot="slotProps" custom>
                 <div class="article-img" @click="slotProps.navigate">
-                    <img src="@img/blog/blogBg1.jpeg" alt="">
+                    <img :src="IMG_URL + 'blog_bg_3.webp'" alt="">
                 </div>
             </router-link>
             <div class="article-info">
@@ -28,9 +28,11 @@
     </el-col>   
 </template>
 <script>
+import {IMG_URL} from '@const/index.js'
+
 export default {
     setup(){
-
+        IMG_URL
     }
 }
 </script>

@@ -2,7 +2,7 @@
     <div class="articles-pagination">
         <div class="post">
             <router-link to="/home">
-                <img src="../../../assets/img/blog/blogBg1.jpeg" alt="">
+                <img :src="IMG_URL + 'blog_bg_2.webp'" alt="">
                 <div class="post-info">
                     <div class="label">上一篇</div>
                     <div class="title">博客技术总结</div>
@@ -12,7 +12,7 @@
 
         <div class="post">
             <router-link to="/home">
-                <img src="../../../assets/img/blog/blogBg2.jpeg" alt="">
+                <img :src="IMG_URL + 'blog_bg_3.webp'" alt="">
                 <div class="post-info">
                     <div class="label">下一篇</div>
                     <div class="title">2022新的开始</div>
@@ -22,8 +22,13 @@
     </div>
 </template>
 <script>
+import {IMG_URL} from '@const/index.js'
 export default {
-    
+    setup(){
+        return {
+            IMG_URL
+        }
+    }
 }
 </script>
 <style lang="less" scoped>
