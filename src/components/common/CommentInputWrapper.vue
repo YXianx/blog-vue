@@ -1,6 +1,6 @@
 <template lang="">
     <div class="comment-input-wrapper">
-        <img v-if="mode!='reply'" class="head" src="@img/user/head.png" alt="">
+        <img v-if="mode!='reply'" class="head" :src="IMG_URL + 'user_head.webp'" alt="">
         <div class="input-wrapper" :style="mode!='reply'?'margin-left: 20px':'margin-left:0px'">
             <div class="comment-input" @click="isShowEmoji=false">
                 <textarea ref="textarea" 
@@ -31,6 +31,7 @@
 </template>
 <script>
 import {ref} from 'vue'
+import {IMG_URL} from '@const/index.js'
 export default {
     props:{
         mode:{
@@ -67,7 +68,9 @@ export default {
 
             emojiBtnClick,
             emojiClick,
-            cancelClick
+            cancelClick,
+
+            IMG_URL
         }
     }
 }

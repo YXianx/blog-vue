@@ -10,7 +10,7 @@
         </banner>
         <div class="about-container v-card">
             <div class="head-img">
-                <img src="@img/user/head.png" alt="">
+                <img :src="IMG_URL + 'user_head.webp'" alt="">
             </div>
             <div class="about-title">
                 关于我

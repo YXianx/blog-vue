@@ -55,7 +55,6 @@ export default {
             }
         })
 
-        const url = require("@img/other/1.jpg")
         const srcList = [
             IMG_URL + "tag_bg_1.webp",
             IMG_URL + "tag_bg_2.webp",
@@ -76,7 +75,6 @@ export default {
         return {
             route,
 
-            url,
             srcList,
             ImageViewClick,
 

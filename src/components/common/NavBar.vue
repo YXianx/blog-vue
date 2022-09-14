@@ -22,7 +22,7 @@
             <van-popup v-model:show="isShowPopup" position="right" :style="{width:'250px',height: '100vh' }">
                 <div class="blog-menu">
                     <div class="blogger-info">
-                        <img src="../../assets/img/user/head.png" alt="">
+                        <img :src="IMG_URL + 'user_head.webp'" alt="">
                     </div>
                     <div class="blog-info-wrapper">
                         <div class="blog-info-data">
@@ -73,6 +73,8 @@ import {useNavBarScroll} from '../../hook/index'
 import {useGetters} from '../../hook/common/useGetters'
 import emitter from '../../eventbus/index.js'
 
+import {IMG_URL} from '@const/index.js'
+
 export default {
     setup(){
         // 1、获取导航栏位置状态
@@ -100,7 +102,9 @@ export default {
 
             getThemeConfig,
 
-            spotLightClick
+            spotLightClick,
+
+            IMG_URL
         }
     }
 }

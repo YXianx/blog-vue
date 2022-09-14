@@ -30,6 +30,7 @@ import {ref} from 'vue'
 import CommentInputWrapper from './CommentInputWrapper.vue'
 import CommentTree from './CommentTree.vue'
 
+import {IMG_URL} from '@const/index.js'
 export default {
     props:{
         commentDataTree:{
@@ -37,7 +38,7 @@ export default {
             default(){
                 return [
                     {
-                        imgUrl:require('@img/user/head.png'),
+                        imgUrl:IMG_URL + 'user_head.webp',
                         user:"内部测试用户",
                         info:{
                             order:1,
@@ -47,7 +48,7 @@ export default {
                         content: "这是一条测试评论",
                         children:[
                             {
-                                imgUrl:require('@img/blog/blogBg1.jpeg'),
+                                imgUrl:IMG_URL + 'tag_bg_2.webp',   
                                 user:"测试用户",
                                 info:{
                                     order:0,
@@ -57,7 +58,7 @@ export default {
                                 content: "testtesttest",
                                 children:[
                                     {
-                                        imgUrl:require('@img/blog/blogBg2.jpeg'),
+                                        imgUrl:IMG_URL + 'tag_bg_3.webp',   
                                         user:"测试用户2",
                                         info:{
                                             order:0,
@@ -69,7 +70,7 @@ export default {
                                 ]
                             },
                             {
-                                imgUrl:require('@img/blog/blogBg2.jpeg'),
+                                imgUrl:IMG_URL + 'tag_bg_2.webp',
                                 user:"测试用户2",
                                 info:{
                                     order:0,
@@ -81,7 +82,7 @@ export default {
                         ]
                     },
                     {
-                        imgUrl:require('@img/blog/blogcard.png'),
+                        imgUrl:IMG_URL + 'tag_bg_3.webp',
                         user:"测试用户3",
                         info:{
                             order:2,

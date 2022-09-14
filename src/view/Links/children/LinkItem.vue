@@ -26,20 +26,21 @@
 </div>
 </template>
 <script>
+import {IMG_URL} from '@const/index.js'
 export default {
     props:{
         id:0
     },
     setup(){
         const srcList = [
-            require("@img/other/1.jpg"), 
-            require("@img/other/2.jpg"),
-            require("@img/other/3.jpg"),
-            require("@img/other/4.jpg"),
-            require("@img/other/5.jpg"),
-            require("@img/other/6.jpg"),
-            require("@img/other/7.jpg"),
-            require("@img/other/8.jpg"),
+            IMG_URL + "tag_bg_1.webp",
+            IMG_URL + "tag_bg_2.webp",
+            IMG_URL + "tag_bg_3.webp",
+            IMG_URL + "tag_bg_4.webp",
+            IMG_URL + "tag_bg_5.webp",
+            IMG_URL + "tag_bg_6.webp",
+            IMG_URL + "tag_bg_7.webp",
+            IMG_URL + "tag_bg_8.webp"
         ]
 
         return {
