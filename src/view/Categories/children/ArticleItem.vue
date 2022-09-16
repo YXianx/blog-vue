@@ -32,7 +32,9 @@ import {IMG_URL} from '@const/index.js'
 
 export default {
     setup(){
-        IMG_URL
+        return{
+            IMG_URL
+        }
     }
 }
 </script>

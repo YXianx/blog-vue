@@ -3,9 +3,11 @@
     <blog-nav-bar class="app-nav-bar"/>
     <spot-light :isShow="spotLightState"/>
     <router-view v-slot="props" @click="cancelSpotLight">
-      <transition name="route" mode="out-in" appear>
-        <component :is="props.Component"></component>
-      </transition>
+      <keep-alive>
+        <transition name="route" mode="out-in" appear>
+          <component :is="props.Component"></component>
+        </transition>
+      </keep-alive>
     </router-view>
     <color-footer/>
   </div>

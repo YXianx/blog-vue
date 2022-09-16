@@ -100,6 +100,7 @@ export default {
                     // 8、给容器添加代码高亮 (在组件设置了ishljs为false后样式就需要自己导入)
                     hljs.highlightBlock(codeView);
 
+                    // TODO:复制代码段功能有问题，待修复
                     // 9、实现复制 (此处元素事件需要放在codeView被挂载之后执行，否则复制i标签的点击事件加不上)
                     codeView.lastElementChild.lastElementChild.onclick = ()=>{
                         const copyPromise = navigator.clipboard.writeText(
