@@ -67,6 +67,7 @@ export default {
         onMounted(()=>{
             setBannerBg()
         })
+        
         return {
             bannerRef
         }
@@ -77,7 +78,8 @@ export default {
     .banner{
         position:relative;
         width: 100%;
-        height: 100vh; 
+        height: 100vh;
+        background-color: #49b1f5 !important; 
         .info{
             display: flex;
             flex-direction: column;
