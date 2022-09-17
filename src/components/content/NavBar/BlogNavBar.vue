@@ -1,5 +1,14 @@
 <template lang="">
-        <nav-bar>
+        <nav-bar :wrapperMenuList="[
+            {to:'/home',title:'首页',iconfont:'\ue608'},
+            {to:'/archives',title:'归档',iconfont:'\ue660'},
+            {to:'/albums',title:'相册',iconfont:'\ue7bf'},
+            {to:'/talks',title:'说说',iconfont:'\ue61e'},
+            {to:'/categories',title:'分类',iconfont:'\ue63a'},
+            {to:'/tag',title:'标签',iconfont:'\ue615'},
+            {to:'/links',title:'友链',iconfont:'\ue614'},
+            {to:'/about',title:'关于',iconfont:'\ue649'},
+        ]">
             <template #left="slotProps">
                 <div class="left-menu">
                     <router-link to="/home" custom v-slot="props">
@@ -49,12 +58,13 @@
         </nav-bar>
 </template>
 <script>
-import {ref,emit} from 'vue'
+import {ref} from 'vue'
 import {useStore} from 'vuex'
 import {useGetters} from'@hook/common/useGetters'
 
 import NavBar from '../../common/NavBar.vue'
 import MenuItem from './MenuItem.vue'
+import WrapperMenuItem from './WrapperMenuItem.vue'
 
 import {setTheme} from '../../../assets/css/theme/theme'
 import emitter from '../../../eventbus/index.js'
@@ -62,7 +72,9 @@ export default {
     emit:["spotLightClick"],
     components:{
         NavBar,
-        MenuItem
+        MenuItem,
+
+        WrapperMenuItem
     },
 
     setup(props,{emit}){

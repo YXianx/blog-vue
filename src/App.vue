@@ -2,6 +2,7 @@
   <div class="app">
     <blog-nav-bar class="app-nav-bar"/>
     <spot-light :isShow="spotLightState"/>
+
     <router-view v-slot="props" @click="cancelSpotLight">
       <keep-alive>
         <transition name="route" mode="out-in" appear>
@@ -9,6 +10,7 @@
         </transition>
       </keep-alive>
     </router-view>
+    
     <color-footer/>
   </div>
 </template>

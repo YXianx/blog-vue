@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="home-container">
+    <div class="home-container" ref="homeContainerRef">
         <el-row :gutter="15">
             <el-col :md="18" :xs="24">
                 <blog-card :imgOrder="item%2!=0?true:false" v-for="item in 5"/>
@@ -11,12 +11,29 @@
     </div>
 </template>
 <script>
+import {ref,nextTick} from 'vue'
+import emitter from '../../../eventbus/index'
+
 import BlogCard from '../../../components/content/BlogCard.vue';
 import BlogWrapper from '../../../components/content/BlogWrapper.vue';
 export default {
+    emit:["homeContainerTop"],
+
     components:{
         BlogCard,
         BlogWrapper
+    },
+
+    setup(){
+        const homeContainerRef = ref(null)
+        let offsetTop = 0
+        nextTick(()=>{
+            offsetTop = homeContainerRef.value.offsetTop
+            emitter.emit('homeContainerTop',offsetTop)
+        })
+        return {
+            homeContainerRef
+        }
     }
 }
 </script>

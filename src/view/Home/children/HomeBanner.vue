@@ -2,7 +2,8 @@
     <div class="home-banner">
         <banner :bannerUrl="IMG_URL+'home_banner.webp'" 
                 title="贤先生 · 个人博客"
-                :resetInfoHeight="true">
+                :resetInfoHeight="true"
+                :toScrollY="homeContainerOffsetTop">
             <template #title>
                 <h1>贤先生 · 个人博客</h1>
             </template>
@@ -13,7 +14,10 @@
     </div>
 </template>
 <script>
+import {ref} from 'vue'
 import WriteTextAni from '../../../components/common/WriteTextAni.vue';
+
+import emitter from '../../../eventbus/index'
 import {IMG_URL} from '@const/index.js'
 
 export default {
@@ -22,8 +26,14 @@ export default {
     },
 
     setup(){
+        let homeContainerOffsetTop = ref(0)
+        emitter.on("homeContainerTop",(offsetTop) => {
+            homeContainerOffsetTop.value = offsetTop
+        })
         return {
-            IMG_URL
+            IMG_URL,
+
+            homeContainerOffsetTop
         }
     }
 }

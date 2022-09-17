@@ -11,7 +11,7 @@
                 <slot name="other"></slot>
             </div>
         </div>
-        <div class="scroll-down" v-if="isScrollDown">
+        <div class="scroll-down" v-if="isScrollDown" @click="scrollClick">
             <i class="iconfont">&#xe626;</i>
         </div>
     </div>
@@ -19,6 +19,8 @@
 <script>
 // TODO:给scroll-down下滑图标利用popmotion实现滚动到内容区的功能
 import {ref,onMounted} from 'vue'
+import {useScrollAnimate} from '@hook/index'
+
 export default {
     props:{
         resetInfoHeight:{
@@ -43,6 +45,10 @@ export default {
                 return true
             }
         },
+        toScrollY:{
+            type:Number,
+            default(){return 0}
+        },
         backgroundScroll:{
             type:Boolean,
             default(){
@@ -54,7 +60,7 @@ export default {
             default(){
                 return false
             }
-        }
+        },  
     },
 
     setup(props){        
@@ -64,12 +70,20 @@ export default {
             bannerRef.value.style.backgroundAttachment = props.backgroundScroll?"fixed":"none"
         }
 
+        const scrollClick = ()=>{
+            let from = window.scrollY
+            let to = props.toScrollY
+            useScrollAnimate(from,to)
+        }
+
         onMounted(()=>{
             setBannerBg()
         })
-        
+
         return {
-            bannerRef
+            bannerRef,
+            
+            scrollClick
         }
     }
 }
@@ -79,7 +93,9 @@ export default {
         position:relative;
         width: 100%;
         height: 100vh;
+        // 当图片还未加载出来时显示背景颜色
         background-color: #49b1f5 !important; 
+
         .info{
             display: flex;
             flex-direction: column;

@@ -12,6 +12,12 @@ export default {
     components:{
         HomeBanner,
         HomeContainer,
+    },
+
+    setup(){
+        return {
+
+        }
     }
 }
 </script>

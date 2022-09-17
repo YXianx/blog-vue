@@ -47,19 +47,13 @@
                     <hr/>
 
                     <transition name="menu">
-                        <div class="menu-container-md" v-if="isShowPopup">
-                            <div class="menu-item-md">
-                                <router-link to="/home">
-                                    <i class="iconfont">&#xe608;</i>
-                                    首页
-                                </router-link>
-                            </div>
-                            <div class="menu-item-md">
-                                <router-link to="/home">
-                                    <i class="iconfont">&#xe649;</i>
-                                    关于
-                                </router-link>
-                            </div>
+                        <div class="menu-container-md" v-if="isShowPopup">                            
+                            <wrapper-menu-item v-for="(item,index) in wrapperMenuList" 
+                                               :title="item.title" 
+                                               :to="item.to" 
+                                               :iconfont="item.iconfont"
+                                               @wrapperItemClick="handleWrapperItemClick"
+                            />
                         </div>
                     </transition>
                 </div>
@@ -68,8 +62,11 @@
     </transition>
 </template>
 <script>
-// TODO:移动端导航菜单添加各个模块的路由
+// TODO:移动端导航菜单逻辑优化，当点击路由选项后，导航菜单隐藏
 import {ref} from 'vue'
+
+import WrapperMenuItem from '@component/content/NavBar/WrapperMenuItem.vue'
+
 import {useNavBarScroll} from '../../hook/index'
 import {useGetters} from '../../hook/common/useGetters'
 import emitter from '../../eventbus/index.js'
@@ -77,6 +74,15 @@ import emitter from '../../eventbus/index.js'
 import {IMG_URL} from '@const/index.js'
 
 export default {
+    props:{
+        wrapperMenuList:{
+            type:Array,
+            default(){return []}
+        }
+    },
+    components:{
+        WrapperMenuItem
+    },
     setup(){
         // 1、获取导航栏位置状态
         const {isShow,inTop} = useNavBarScroll()
@@ -94,7 +100,15 @@ export default {
         const spotLightClick  = ()=>{
             emitter.emit("spotLightClick")
         }
+
+        // 5、移动端侧边栏导航点击事件
+        const handleWrapperItemClick = ()=>{
+            // 点击导航跳转时隐藏侧边栏
+            isShowPopup.value = false
+        }
         return{
+            IMG_URL,
+
             isShow,
             inTop,
 
@@ -105,7 +119,7 @@ export default {
 
             spotLightClick,
 
-            IMG_URL
+            handleWrapperItemClick
         }
     }
 }
@@ -171,15 +185,6 @@ export default {
 
         .menu-container-md{
             padding: 0px 10px 40px;
-            .menu-item-md a{
-                display: block;
-                padding: 6px 30px;
-                line-height: 2;
-                color: #4c4948;
-                i{
-                    margin-right: 3rem;
-                }
-            }
         }
     }
 
