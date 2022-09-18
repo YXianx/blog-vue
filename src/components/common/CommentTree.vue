@@ -1,21 +1,21 @@
 <template lang="">
     <div class="comment-tree" v-for="(item,index) in commentDataTree">
-        <img class="head" :src="item.imgUrl" alt="">
+        <img class="head" :src="IMG_URL + 'user_head.webp'" alt="">
         <div class="comment-meta">
-            <div class="user">{{item.user}}</div>
+            <div class="user">{{item.nickname}}</div>
             <div class="info">
-                <span v-if="item.info.order!=0">{{item.info.order}}楼</span>
-                <span>{{item.info.date}}</span>
-                <span><i class="iconfont">&#xe651;</i> {{item.info.like}}</span> 
+                <span>{{index+1}}楼</span>
+                <span>{{item.createTime}}</span>
+                <span><i class="iconfont">&#xe651;</i> {{item.likeCount}}</span> 
                 <span class="reply" @click="replyClick(index)">回复</span>
             </div>
             <div class="comment-content">
-                <p>{{item.content}}</p>
+                <p>{{item.commentContent}}</p>
             </div>
 
             <comment-input-wrapper v-if="isShowReply && index === currentIndex" 
                                    mode="reply" 
-                                   :placeholder="'回复 @'+item.user+':'"
+                                   :placeholder="'回复 @'+item.nickname+':'"
                                    @inputWrapperCancel="cancelEvent"/>
             
             <div class="comment-children" v-if="item.children">
@@ -36,62 +36,7 @@ export default {
         commentDataTree:{
             type:Array,
             default(){
-                return [
-                    {
-                        imgUrl:IMG_URL + 'user_head.webp',
-                        user:"内部测试用户",
-                        info:{
-                            order:1,
-                            date:"2022-08-03",
-                            like:24
-                        },
-                        content: "这是一条测试评论",
-                        children:[
-                            {
-                                imgUrl:IMG_URL + 'tag_bg_2.webp',   
-                                user:"测试用户",
-                                info:{
-                                    order:0,
-                                    date:"2022-08-31",
-                                    like:12
-                                },
-                                content: "testtesttest",
-                                children:[
-                                    {
-                                        imgUrl:IMG_URL + 'tag_bg_3.webp',   
-                                        user:"测试用户2",
-                                        info:{
-                                            order:0,
-                                            date:"2022-08-31",
-                                            like:0
-                                        },
-                                        content: "lalala"
-                                    }
-                                ]
-                            },
-                            {
-                                imgUrl:IMG_URL + 'tag_bg_2.webp',
-                                user:"测试用户2",
-                                info:{
-                                    order:0,
-                                    date:"2022-08-31",
-                                    like:0
-                                },
-                                content: "lalala"
-                            }
-                        ]
-                    },
-                    {
-                        imgUrl:IMG_URL + 'tag_bg_3.webp',
-                        user:"测试用户3",
-                        info:{
-                            order:2,
-                            date:"2022-07-2",
-                            like:12
-                        },
-                        content: "hello world"
-                    }
-                ]
+                return []
             }
         }
     },
@@ -113,6 +58,8 @@ export default {
         }
 
         return{
+            IMG_URL,
+
             currentIndex,
             isShowReply,
             replyClick,

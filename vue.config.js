@@ -24,7 +24,8 @@ module.exports = defineConfig({
         "@img":resolve('src/assets/img'),
         "@component":resolve('src/components'),
         "@hook":resolve('src/hook'),
-        "@const":resolve('src/constant')
+        "@const":resolve('src/constant'),
+        "@network":resolve('src/network')
       }
     },
     devServer:{

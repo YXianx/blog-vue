@@ -9,28 +9,28 @@
     >
         <template #title>
             <div class="articles-title">
-                博客测试内容
+                {{articleDetail.articleTitle}}
             </div>
         </template>
         <template #other>
             <div class="articles-info">
                 <div class="top-line">
-                    <span class="info-item"><i class="iconfont">&#xeb3f;</i> 发表于 2022-08-24</span>
+                    <span class="info-item"><i class="iconfont">&#xeb3f;</i> 发表于 {{articleDetail.createTime}}</span>
                     <span class="separator">|</span>
-                    <span class="info-item"><i class="iconfont">&#xe628;</i> 更新于 2022-08-24</span>
+                    <span class="info-item"><i class="iconfont">&#xe628;</i> 更新于 {{articleDetail.updateTime}}</span>
                     <span class="separator">|</span>
                     <router-link to="/home">
-                        <span class="info-item"><i class="iconfont">&#xe600;</i> 项目介绍</span>
+                        <span class="info-item"><i class="iconfont">&#xe600;</i> {{articleDetail.categoryName}}</span>
                     </router-link>
                 </div>
                 <div class="bottom-line">
-                    <span class="info-item"><i class="iconfont">&#xe7b1;</i> 字数统计：540</span>
+                    <span class="info-item"><i class="iconfont">&#xe7b1;</i> 字数统计：{{articleDetail.wordCount}}</span>
                     <span class="separator">|</span>
-                    <span class="info-item"><i class="iconfont">&#xe659;</i> 阅读时长：2分钟</span>
+                    <span class="info-item"><i class="iconfont">&#xe659;</i> 阅读时长：{{articleDetail.readTime}}</span>
                     <span class="separator">|</span>
-                    <span class="info-item"><i class="iconfont">&#xe64b;</i> 阅读量：125</span>
+                    <span class="info-item"><i class="iconfont">&#xe64b;</i> 阅读量：{{articleDetail.readCount}}</span>
                     <span class="separator">|</span>
-                    <span class="info-item"><i class="iconfont">&#xe607;</i> 评论数：24</span>
+                    <span class="info-item"><i class="iconfont">&#xe607;</i> 评论数：{{articleDetail.commentCount}}</span>
                 </div>
             </div>
         </template>
@@ -39,6 +39,12 @@
 <script>
 import {IMG_URL} from '@const/index.js'
 export default {
+    props:{
+        articleDetail:{
+            type: Object,
+            default(){return {}}
+        }
+    },
     setup(){
         return {
             IMG_URL

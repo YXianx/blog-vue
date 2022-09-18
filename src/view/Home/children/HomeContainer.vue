@@ -2,7 +2,10 @@
     <div class="home-container" ref="homeContainerRef">
         <el-row :gutter="15">
             <el-col :md="18" :xs="24">
-                <blog-card :imgOrder="item%2!=0?true:false" v-for="item in 5"/>
+                <blog-card v-for="(item,index) in articlesList"
+                           :imgOrder="(index+1)%2!=0?true:false"
+                           :articleData="item"
+                />
             </el-col>
             <el-col class="el-wrapper" :md="6" :xs="24">
                 <blog-wrapper class="wrapper"/>
@@ -16,6 +19,8 @@ import emitter from '../../../eventbus/index'
 
 import BlogCard from '../../../components/content/BlogCard.vue';
 import BlogWrapper from '../../../components/content/BlogWrapper.vue';
+
+import {getArticlesList} from '@network/articles'
 export default {
     emit:["homeContainerTop"],
 
@@ -25,6 +30,12 @@ export default {
     },
 
     setup(){
+        // 1、请求博客列表数据
+        const articlesList = ref([])
+        getArticlesList().then(res=>{
+            articlesList.value = res.data.data
+        })
+
         const homeContainerRef = ref(null)
         let offsetTop = 0
         nextTick(()=>{
@@ -32,7 +43,8 @@ export default {
             emitter.emit('homeContainerTop',offsetTop)
         })
         return {
-            homeContainerRef
+            homeContainerRef,
+            articlesList
         }
     }
 }

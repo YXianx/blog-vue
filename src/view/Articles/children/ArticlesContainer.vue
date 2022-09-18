@@ -14,7 +14,7 @@
                     <comment-input-wrapper/>
                     
                     <articles-comment :isShowIcon="false" :commentNum="2"/>
-                    <comment-tree/>
+                    <comment-tree :commentDataTree="commentList"/>
                 </div>
             </el-col>
             <el-col :md=6 :xs="24">
@@ -30,6 +30,8 @@
     </div>
 </template>
 <script>
+import {ref} from 'vue'
+
 import ArticlesContent from './ArticlesContent.vue'
 import ArticlesCatalog from './ArticlesCatalog.vue'
 import ArticlesCopyright from './ArticlesCopyright.vue';
@@ -43,6 +45,7 @@ import CommentInputWrapper from '@component/common/CommentInputWrapper.vue'
 import CommentTree from '@component/common/CommentTree.vue'
 
 import { useGetters } from '@/hook/common/useGetters';
+import emitter from '../../../eventbus/index'
 export default {    
     components:{
         ArticlesContent,
@@ -52,15 +55,20 @@ export default {
         ArticlesReward,
         ArticlesPagination,
         ArticlesRecommend,
-        ArticlesComment,
+        ArticlesComment, 
 
         CommentInputWrapper,
         CommentTree
     },
 
     setup(){
+        const commentList = ref([])
+        emitter.on('articlesComment',(res)=>{
+            commentList.value = res
+        })
         return {
-            ...useGetters("themeModule",["getThemeConfig"])
+            ...useGetters("themeModule",["getThemeConfig"]),
+            commentList
         }
     }
 }

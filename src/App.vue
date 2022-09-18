@@ -3,7 +3,8 @@
     <blog-nav-bar class="app-nav-bar"/>
     <spot-light :isShow="spotLightState"/>
 
-    <router-view v-slot="props" @click="cancelSpotLight">
+    <!-- router-view加上key绑定后key不同表示每个路由页面都是完全独立的，不会进行复用 -->
+    <router-view v-slot="props" @click="cancelSpotLight" :key="$route.path">
       <keep-alive>
         <transition name="route" mode="out-in" appear>
           <component :is="props.Component"></component>

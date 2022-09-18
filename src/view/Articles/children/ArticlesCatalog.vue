@@ -14,15 +14,15 @@
         </ol>
         
         <div class="article-list" v-if="mode === 'articles'">
-            <div class="article-item" v-for="item in 5">
-                <router-link to="/articles">
-                    <img :src="IMG_URL + 'blog_bg_1.webp'" alt=""/>
+            <div class="article-item" v-for="item in newArticles">
+                <router-link :to="'/articles/'+item.id">
+                    <img :src="item.articleCover" alt=""/>
                 </router-link>
                 <div class="content">
                     <router-link to="/articles">
-                        我的2021
+                        {{item.articleTitle}}
                     </router-link>
-                    2021-12-30
+                    {{item.createTime}}
                 </div>
             </div>    
         </div>
@@ -30,12 +30,13 @@
 </template>
 <script>
 // TODO:递归方式重构目录导航，参考评论区组件的递归树方式
-import { ref,reactive,onMounted,nextTick,watchEffect,watch } from 'vue';
+import { ref,reactive,inject,onMounted,nextTick,watchEffect,watch } from 'vue';
 
 import {useWinScroll} from '../../../hook/index' 
 import {useScrollAnimate} from '../../../hook/index'
 
 import {IMG_URL} from '@const/index.js'
+import emitter from '../../../eventbus/index.js'
 export default {
     props:{
         title:{
@@ -53,6 +54,11 @@ export default {
     },
 
     setup(){
+        const newArticles = ref([])
+        emitter.on('newArticles',(res)=>{
+            newArticles.value = res
+        })
+
         onMounted(()=>{
             nextTick(()=>{
                 // 延时获取DOM已保证获取到的标题offsetTop为准确的值，如果不这样做那么重复刷新页面时，由于DOM还没加载完毕，offsetTop的值会变化
@@ -123,6 +129,8 @@ export default {
         })
 
         return{
+            newArticles,
+            
             linkClick,
             catalogList,
             currentIndex,

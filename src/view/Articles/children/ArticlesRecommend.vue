@@ -5,16 +5,16 @@
             相关推荐
         </div>
         <div class="recommend-list">
-            <div class="recommend-item" v-for="item in 6">
-                <router-link to="/home">
-                    <img :src="IMG_URL + 'blog_bg_3.webp'" alt="">
+            <div class="recommend-item" v-for="item in recommendList">
+                <router-link :to="'/articles/'+item.id">
+                    <img :src="item.articleCover" alt="">
                     <div class="recommend-info">
                         <div class="recommend-date">
                             <i class="iconfont">&#xeb3f;</i>
-                            2022-8-30
+                            {{item.createTime}}
                         </div>
                         <div>
-                            关于我的2022
+                            {{item.articleTitle}}
                         </div>
                     </div>
                 </router-link>
@@ -23,11 +23,20 @@
     </div>
 </template>
 <script>
+import {ref} from 'vue'
 import {IMG_URL} from '@const/index.js'
+import emitter from '../../../eventbus/index'
 export default {
     setup(){
+        const recommendList = ref([])
+        emitter.on('recommendInfo',(res)=>{
+            recommendList.value = res
+        })
+
         return {
-            IMG_URL
+            IMG_URL,
+
+            recommendList
         }
     }
 }

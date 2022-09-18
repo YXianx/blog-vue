@@ -1,29 +1,29 @@
 <template lang="">
     <div class="blog-card v-card">
         <div :class="imgOrder?'left-radius':'right-radius'">
-            <router-link to="/articles">
-                <img :src="IMG_URL + 'blog_bg_3.webp'" alt="">
-                <!-- <img src="" alt=""> -->
+            <router-link :to="'/articles/' + articleData.id">
+                <!-- <img :src="articleData.articleCover" alt=""> -->
+                <el-image :src="articleData.articleCover" style="height:100%"></el-image>
             </router-link>
         </div>
         <div class="ariticle-content">
             <div class="ariticle">
                 <div class="title">
-                    <router-link to="/articles">{{ariticleData.title}}</router-link>
+                    <router-link to="/articles">{{articleData.articleTitle}}</router-link>
                 </div>
                 <div class="info">
-                    <i class="iconfont">&#xeb3f;</i> {{ariticleData.date}}
+                    <i class="iconfont">&#xeb3f;</i> {{articleData.createTime}}
                     <span class="separator">|</span>
                     <router-link to="/articles">
-                        <i class="iconfont">&#xe6aa;</i> {{ariticleData.category}}
+                        <i class="iconfont">&#xe6aa;</i> {{articleData.categoryName}}
                     </router-link>
                     <span class="separator">|</span>
                     <!-- 对tag标签v-for -->
-                    <router-link class="tag" :to="tag.path" v-for="tag in ariticleData.tag">
-                        <i class="iconfont">&#xe615;</i>{{tag.name}}
+                    <router-link class="tag" :to="'/articles/'+ articleData.id" v-for="tag in articleData.tags">
+                        <i class="iconfont">&#xe615;</i>{{tag.tagName}}
                     </router-link>
                 </div>
-                <div class="content">{{ariticleData.content}}</div>
+                <div class="content">{{articleData.articleContent}}</div>
             </div>
         </div>
     </div>
@@ -36,30 +36,11 @@ export default {
             type:Boolean,
             default(){return true}
         },
-        // TODO:(后端)首页的博客卡片模块需要 ariticleData 数据结构来渲染组件
-        ariticleData:{
+        
+        articleData:{
             type:Object,
             default(){
-                return {
-                    id:"1",
-                    title:"博客文章测试",
-                    date:"2022-08-22",
-                    category:"项目介绍",
-                    tag:[
-                        {
-                            name:"Vue",
-                            path:"/home"
-                        },
-                        {
-                            name:"项目",
-                            path:"/home"
-                        }
-                    ],
-                    content:`
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti, quam eos! Eligendi voluptatibus est rerum ad non enim. Dolor, unde aperiam vero molestiae iusto animi inventore! Mollitia eaque obcaecati ab.
-                        Facilis, ex expedita. Natus suscipit, necessitatibus animi quaerat impedit laborum, non eaque numquam ex repellendus, quo iusto molestiae eius. Vel quo dolorum ipsa at dolorem deserunt delectus eveniet dolores ullam!
-                    `
-                }
+                return {}
             }
         }
     },

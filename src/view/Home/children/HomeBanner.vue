@@ -8,30 +8,43 @@
                 <h1>贤先生 · 个人博客</h1>
             </template>
             <template #other>        
-                <WriteTextAni content="长风破浪会有时，直挂云帆济沧海。"></WriteTextAni>
+                <!-- 当古诗请求完毕后再展示组件，否则会出现还没请求完毕，直接传递空值给子组件的情况，导致显示异常 -->
+                <type-write-line :content="speechTalk" v-if="speechTalk.length>0"/>
             </template>
         </banner>
     </div>
 </template>
 <script>
 import {ref} from 'vue'
-import WriteTextAni from '../../../components/common/WriteTextAni.vue';
+import TypeWriteLine from '../../../components/common/TypeWriteLine.vue';
 
 import emitter from '../../../eventbus/index'
 import {IMG_URL} from '@const/index.js'
 
 export default {
     components:{
-        WriteTextAni
+        TypeWriteLine
     },
 
     setup(){
+        // 1、请求古诗词
+        const speechTalk = ref("")
+        fetch("https://v1.hitokoto.cn/?c=i")
+        .then(res=>{
+            return res.json()
+        })
+        .then(res=>{
+            speechTalk.value = res.hitokoto
+        })
+
         let homeContainerOffsetTop = ref(0)
         emitter.on("homeContainerTop",(offsetTop) => {
             homeContainerOffsetTop.value = offsetTop
         })
         return {
             IMG_URL,
+
+            speechTalk,
 
             homeContainerOffsetTop
         }

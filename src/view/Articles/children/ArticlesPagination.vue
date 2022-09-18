@@ -1,32 +1,46 @@
 <template lang="">
     <div class="articles-pagination">
-        <div class="post">
-            <router-link to="/home">
+        <div class="post" v-if="pageInfo.prePage">
+            <router-link :to="'/articles/' + pageInfo.prePage">
                 <img :src="IMG_URL + 'blog_bg_2.webp'" alt="">
                 <div class="post-info">
-                    <div class="label">上一篇</div>
-                    <div class="title">博客技术总结</div>
+                    <div class="label" style="text-align:left;">上一篇</div>
+                    <div class="title" style="text-align:left;">博客技术总结</div>
                 </div>
             </router-link>
         </div>
 
-        <div class="post">
-            <router-link to="/home">
+        <div class="post" v-if="pageInfo.nextPage">
+            <router-link :to="'/articles/' + pageInfo.nextPage"> 
                 <img :src="IMG_URL + 'blog_bg_3.webp'" alt="">
                 <div class="post-info">
-                    <div class="label">下一篇</div>
-                    <div class="title">2022新的开始</div>
+                    <div class="label" style="text-align:right;">下一篇</div>
+                    <div class="title" style="text-align:right;">2022新的开始</div>
                 </div>
             </router-link>
         </div>
     </div>
 </template>
 <script>
+    // TODO:路由切换又问题
+import {ref} from 'vue'
+
 import {IMG_URL} from '@const/index.js'
+import emitter from '../../../eventbus/index.js'
+import {getArticlesDetail} from '@network/articles'
 export default {
     setup(){
+        const pageInfo = ref({})
+        const articlesDetails = []
+        emitter.on('paginationInfo',(res)=>{
+            pageInfo.value = res
+        })
+
+
+
         return {
-            IMG_URL
+            IMG_URL,
+            pageInfo
         }
     }
 }

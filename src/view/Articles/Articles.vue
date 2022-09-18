@@ -1,14 +1,17 @@
 <template lang="">
     <div class="articles">
-        <articles-banner/>
+        <articles-banner :articleDetail="articleDetail"/>
         <articles-container class='container'/>
     </div>
 </template>
 <script>
-import {provide} from 'vue'
+import {ref,provide,computed} from 'vue'
+import {useRoute} from 'vue-router'
 import ArticlesBanner from './children/ArticlesBanner.vue';
 import ArticlesContainer from './children/ArticlesContainer.vue';
 
+import {getArticlesDetail,getArticlesComment} from '@network/articles.js'
+import emitter from '../../eventbus/index.js'
 export default {
     components:{
         ArticlesBanner,
@@ -16,78 +19,50 @@ export default {
     }, 
 
     setup(){
-        const articleDetailData = `
-# 单元测试
-## 第一标题
-wqewqe
-qwewqe
-qwe
-wqr
-wrwrwrw
+        // 1、请求文章详情
+        const route = useRoute()
+        const id = route.params.id
+        const articleDetail = ref({})
+        getArticlesDetail(id)
+        .then(res=>{
+            articleDetail.value = res.data.data
+            // 1-2、传递最新文章列表给最新列表组件
+            emitter.emit("newArticles",articleDetail.value.newArticles)
+            // 1-3、传递文章页码信息给页码导航组件
+            const paginationInfo = {
+                prePage: articleDetail.value.nextArticleId,
+                nextPage: articleDetail.value.lastArticleId
+            }
+            emitter.emit("paginationInfo",paginationInfo)
+            // 1-4、传递文章标签信息给标签组件
+            emitter.emit("articleTags",articleDetail.value.tags)
+            // 1-5、传递点赞数
+            emitter.emit("likeInfo",articleDetail.value.likeCount)
+            // 1-6、传递相关推荐
+            emitter.emit("recommendInfo",articleDetail.value.recommendArticles)
+            // 1-7 传递评论数
+            emitter.emit("commentCount",articleDetail.value.commentCount)
+        })
 
-wqrwqrqwrqw
-## 第二标题
-qwrwqr
-rrrr
-r
-r
-r
+        // 2、传递文章内容给内容显示组件
+        // 因为数据异步问题，子组件是拿不到值，将provide改成computed方式即可变为响应式
+        // get set为了解决浏览器报警告说该值为只读的情况
+        provide("content",computed({
+            get(){
+                return articleDetail.value.articleContent      
+            },
+            set(){}
+        }))
+    
+        // 3、请求文章评论列表
+        getArticlesComment(id)
+        .then(res=>{
+            emitter.emit("articlesComment",res.data.data)
+        })
 
-## 第三标题
-qwrwqrw
-wer
-e
-re
-rew
-r
-wer
-## 第四标题
-wqeqwrqwr
-qewr
-## 第五标题
-qwr
-这是一段测试文字
-
-[test href]('http://baidu.com')
-\`\`\`html
-<template lang="">
-    <div class="articles-container">
-        <el-row :gutter="15">
-            <el-col :md="18" :xs="24">
-                <mavon-editor 
-                    v-model="articleDetailData.content"
-                    defaultOpen="preview"
-                    :ishljs="false"
-                    :editable="false"
-                    :subfield="false"
-                    :toolbarsFlag="false">
-                </mavon-editor>
-            </el-col>
-            <el-col :md=6 :xs="24">
-                <div style="background:#449522">2</div>
-            </el-col>
-        </el-row>
-    </div>
-</template>
-\`\`\`
-
-\`\`\`js
-onMounted(()=>{
-    nextTick(()=>{
-        getCodes()
-    })
-})
-
-const codes = ref(null)
-const getCodes = ()=>{
-    codes.value = document.querySelectorAll("pre code")
-    console.log(codes.value);
-    init()
-}
-\`\`\`
-                            `
-
-        provide("content",articleDetailData)
+        return {
+            articleDetail
+        }
     }
 }
 </script>

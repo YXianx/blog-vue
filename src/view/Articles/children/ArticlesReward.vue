@@ -2,7 +2,7 @@
     <div class="articles-reward">
         <div class="reward-item like">
             <i class="iconfont">&#xe651;</i>
-            点赞 51
+            点赞 {{likeCount}}
         </div>
         <div class="reward-item">
             <i class="iconfont">&#xe636;</i>
@@ -11,8 +11,19 @@
     </div>
 </template>
 <script>
+import {ref} from 'vue'
+import emitter from '../../../eventbus/index'
 export default {
-    
+    setup(){
+        const likeCount = ref(0)
+        emitter.on('likeInfo',(res)=>{
+            likeCount.value = res
+        })
+
+        return {
+            likeCount
+        }
+    }
 }
 </script>
 <style lang="less" scoped>

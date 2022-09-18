@@ -7,12 +7,14 @@
             </div>
             <div v-else>
                 <i class="iconfont">&#xe609;</i>
-                评论 {{commentNum}}
+                评论 {{commentCount}}
             </div>
         </div>    
     </div>
 </template>
 <script>
+import {ref} from 'vue'
+import emitter from '../../../eventbus/index'
 export default {
     props:{
         isShowIcon:{
@@ -23,6 +25,16 @@ export default {
         commentNum:{
             type:Number,
             default(){return 1}
+        }
+    },
+    setup(){
+        const commentCount = ref(0)
+        emitter.on('commentCount',(res)=>{
+            commentCount.value = res
+        })
+
+        return {
+            commentCount
         }
     }
 }

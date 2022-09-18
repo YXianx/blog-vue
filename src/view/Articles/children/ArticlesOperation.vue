@@ -1,15 +1,25 @@
 <template lang="">
-    <div class="articles-operation">
+    <div class="articles-operation"> 
         <div class="tag-container">
-            <router-link to="/tag/vue">Vue</router-link>
-            <router-link to="/tag/project">项目</router-link>
+            <router-link :to="'/tag/'+item.id" v-for="item in tags">{{item.tagName}}</router-link>
         </div>
         <div class="social-share"></div>
     </div>
 </template>
 <script>
+import {ref} from 'vue'
+import emitter from '../../../eventbus/index'
 export default {
-    
+    setup(){
+        const tags = ref([])
+        emitter.on('articleTags',res=>{
+            tags.value = res
+        })
+
+        return {
+            tags
+        }
+    }
 }
 </script>
 <style lang="less">

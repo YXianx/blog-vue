@@ -23,15 +23,18 @@ export default {
       }
     },
 
-    setup(){
+    setup(props){
         const contentRef = ref(null)
-
         onMounted(()=>{
+            const contentLength = props.content.length
             const root = document.documentElement
-            const txtLength = contentRef.value.textContent.length
-            root.style.setProperty("--strLength",txtLength-1)
-            root.style.setProperty("--aniSpeed","3s")
-            root.style.setProperty("--toWidth",`${1.2*txtLength}em`)
+            // const txtLength = ref(0)
+            // txtLength.value = props.content.length
+            // console.log(txtLength.value)
+        
+            root.style.setProperty("--aniSpeed","2s")
+            root.style.setProperty("--strLength",contentLength-1)
+            root.style.setProperty("--toWidth",`${1.2*contentLength}em`)
         })
 
         return{
