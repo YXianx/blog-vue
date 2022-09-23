@@ -12,16 +12,16 @@
 </template>
 <script>
 import {ref} from 'vue'
-import emitter from '../../../eventbus/index'
 export default {
+    props:{
+        likeCount:{
+            type: Number,
+            default(){return 0}
+        }
+    },
     setup(){
-        const likeCount = ref(0)
-        emitter.on('likeInfo',(res)=>{
-            likeCount.value = res
-        })
-
         return {
-            likeCount
+            
         }
     }
 }

@@ -1,7 +1,7 @@
 <template lang="">
     <div class="articles-comment">
         <div class="comment-title">
-            <div v-if="isShowIcon">
+            <div v-if="!isCommentView">
                 <i class="iconfont">&#xe609;</i>
                 评论
             </div>
@@ -10,31 +10,39 @@
                 评论 {{commentCount}}
             </div>
         </div>    
+        <div v-if="isCommentView && commentList.length>0" class="comment-view">
+            <comment v-for="(item,index) in commentList"
+                     :commentData="item" 
+                     :floor="commentList.length-index"
+            /> 
+        </div>
     </div>
 </template>
 <script>
-import {ref} from 'vue'
-import emitter from '../../../eventbus/index'
+import Comment from '@component/common/Comment.vue'
+
 export default {
+    components:{
+        Comment
+    },
     props:{
-        isShowIcon:{
+        isCommentView:{
             required:true,
             type:Boolean,
-            default(){return true}
+            default(){return false}
         },
-        commentNum:{
+        commentCount:{
             type:Number,
-            default(){return 1}
+            default(){return 0}
+        },
+        commentList:{
+            type:Array,
+            default(){return []}
         }
     },
     setup(){
-        const commentCount = ref(0)
-        emitter.on('commentCount',(res)=>{
-            commentCount.value = res
-        })
-
         return {
-            commentCount
+
         }
     }
 }

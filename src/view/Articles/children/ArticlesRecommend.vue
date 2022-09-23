@@ -5,7 +5,7 @@
             相关推荐
         </div>
         <div class="recommend-list">
-            <div class="recommend-item" v-for="item in recommendList">
+            <div class="recommend-item" v-for="item in recommendArticles">
                 <router-link :to="'/articles/'+item.id">
                     <img :src="item.articleCover" alt="">
                     <div class="recommend-info">
@@ -27,16 +27,15 @@ import {ref} from 'vue'
 import {IMG_URL} from '@const/index.js'
 import emitter from '../../../eventbus/index'
 export default {
+    props:{
+        recommendArticles:{
+            type: Array,
+            default(){return []}
+        }
+    },
     setup(){
-        const recommendList = ref([])
-        emitter.on('recommendInfo',(res)=>{
-            recommendList.value = res
-        })
-
         return {
             IMG_URL,
-
-            recommendList
         }
     }
 }

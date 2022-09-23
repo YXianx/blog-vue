@@ -50,15 +50,14 @@ export default {
             default(){
                 return 'topic'
             }
+        },
+        newArticles:{
+            type: Array,
+            default(){return []}
         }
     },
 
     setup(){
-        const newArticles = ref([])
-        emitter.on('newArticles',(res)=>{
-            newArticles.value = res
-        })
-
         onMounted(()=>{
             nextTick(()=>{
                 // 延时获取DOM已保证获取到的标题offsetTop为准确的值，如果不这样做那么重复刷新页面时，由于DOM还没加载完毕，offsetTop的值会变化
@@ -129,8 +128,6 @@ export default {
         })
 
         return{
-            newArticles,
-            
             linkClick,
             catalogList,
             currentIndex,

@@ -2,7 +2,7 @@
     <div class="home-container" ref="homeContainerRef">
         <el-row :gutter="15">
             <el-col :md="18" :xs="24">
-                <blog-card v-for="(item,index) in articlesList"
+                <blog-card v-for="(item,index) in getArticlesList"
                            :imgOrder="(index+1)%2!=0?true:false"
                            :articleData="item"
                 />
@@ -15,14 +15,15 @@
 </template>
 <script>
 import {ref,nextTick} from 'vue'
+import {useStore} from 'vuex'
 import emitter from '../../../eventbus/index'
 
 import BlogCard from '../../../components/content/BlogCard.vue';
 import BlogWrapper from '../../../components/content/BlogWrapper.vue';
 
-import {getArticlesList} from '@network/articles'
+import {useGetters} from '@hook/index'
 export default {
-    emit:["homeContainerTop"],
+    emit:["homeContainerTop"], 
 
     components:{
         BlogCard,
@@ -31,12 +32,11 @@ export default {
 
     setup(){
         // 1、请求博客列表数据
-        const articlesList = ref([])
-        getArticlesList().then(res=>{
-            articlesList.value = res.data.data
-        })
+        const store = useStore()
+        store.dispatch('articlesModule/setupArticleList')
 
-        const homeContainerRef = ref(null)
+        // 2、设置banner下拉按钮的滚动距离
+        const homeContainerRef = ref(null) 
         let offsetTop = 0
         nextTick(()=>{
             offsetTop = homeContainerRef.value.offsetTop
@@ -44,7 +44,7 @@ export default {
         })
         return {
             homeContainerRef,
-            articlesList
+            ...useGetters("articlesModule",["getArticlesList"])
         }
     }
 }

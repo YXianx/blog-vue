@@ -6,7 +6,7 @@
 <template lang="">
     <article>
         <mavon-editor
-        v-model="contentData"
+        v-model="articleContent"
         defaultOpen="preview"
         :previewBackground="getThemeConfig('mainCardBg')"
 
@@ -25,10 +25,13 @@ import {useGetters} from '../../../hook/common/useGetters'
 import hljs from "mavon-editor/dist/highlightjs/highlight.min.js";
 // TODO:代码框会出现scroll滚动条，需要解决，且tool栏宽度是死的，在移动端回出现显示不全的问题
 export default {
-    setup(){
-        // 接受Articles.vue传递的md数据
-        const contentData = inject('content') 
-        
+    props:{
+        articleContent:{
+            type: String,
+            default(){return ""}
+        }
+    },
+    setup(){ 
         // 自定义代码块显示
         const codes = ref(null)
         const codeELHeight = ref(0)
@@ -128,7 +131,6 @@ export default {
         })
 
         return {
-            contentData,
             ...useGetters("themeModule",['getThemeConfig'])
         }
     }

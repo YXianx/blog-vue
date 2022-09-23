@@ -33,7 +33,7 @@ import {IMG_URL} from '@const/index.js'
 export default {
     props:{
         imgOrder:{
-            type:Boolean,
+            type:Boolean, 
             default(){return true}
         },
         

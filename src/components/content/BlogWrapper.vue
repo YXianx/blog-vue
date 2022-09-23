@@ -30,7 +30,6 @@ import {IMG_URL} from '@const/index.js'
  
 export default {
     props:{
-        // TODO:(后端)首页博主卡片展示，需要 wrapperData 中的数据渲染组件
         wrapperData:{
             type:Object,
             default(){

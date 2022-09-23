@@ -1,5 +1,6 @@
 import {createStore} from "vuex"
 import {themeModule} from './modules/theme'
+import {articlesModule} from './modules/articles'
 
 const store = createStore({
     state:{
@@ -15,7 +16,8 @@ const store = createStore({
 
     },
     modules:{
-        themeModule
+        themeModule,
+        articlesModule
     }
 })
 

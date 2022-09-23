@@ -1,20 +1,18 @@
 <template lang="">
     <div class="comment-input-wrapper">
-        <img v-if="mode!='reply'" class="head" :src="IMG_URL + 'user_head.webp'" alt="">
-        <div class="input-wrapper" :style="mode!='reply'?'margin-left: 20px':'margin-left:0px'">
+        <div class="input-wrapper" :style="'margin-left:0px'">
             <div class="comment-input" @click="isShowEmoji=false">
                 <textarea ref="textarea" 
                           v-model="commentText" 
                           :placeholder="placeholder"
-                          :style="{height:mode!='reply'?'205px':'130px'}">
+                          :style="{height:'130px'}">
                 </textarea>
             </div>
             <div class="tool-bar">
                 <i class="iconfont" @click="emojiBtnClick">&#xe6fc;</i>
                 <div class="btns">
-                    <el-button v-if="mode=='reply'" @click="cancelClick">取消</el-button>
-                    <el-button v-if="mode=='reply'">回复</el-button>
-                    <el-button v-else>发布</el-button>
+                    <el-button @click="cancelClick">取消</el-button>
+                    <el-button @click="replyClick">回复</el-button>
                 </div>
                 <transition name="emoji">
                     <div class="emoji-list" v-if="isShowEmoji">
@@ -34,21 +32,18 @@ import {ref} from 'vue'
 import {IMG_URL} from '@const/index.js'
 export default {
     props:{
-        mode:{
-            type:String,
-            default(){return "comment"}
-        },
         placeholder:{
             type:String,
             default(){return '留下点什么吧...'}
         }
     },
     setup(props,{emit}){
+        // 1、评论框初始化内容
         const textarea = ref(null)
         const isShowEmoji = ref(false)
         const commentText = ref("")
         const list = ['微笑', '撇嘴', '色', '发呆', '得意', '流泪', '害羞', '闭嘴', '睡', '大哭', '尴尬', '发怒', '调皮', '呲牙', '惊讶', '难过', '酷', '冷汗', '抓狂', '吐', '偷笑', '可爱', '白眼', '傲慢', '饥饿', '困', '惊恐', '流汗', '憨笑', '大兵', '奋斗', '咒骂', '疑问', '嘘', '晕', '折磨', '衰', '骷髅', '敲打', '再见', '擦汗', '抠鼻', '鼓掌', '糗大了', '坏笑', '左哼哼', '右哼哼', '哈欠', '鄙视', '委屈', '快哭了', '阴险', '亲亲', '吓', '可怜', '菜刀', '西瓜', '啤酒', '篮球', '乒乓', '咖啡', '饭', '猪头', '玫瑰', '凋谢', '示爱', '爱心', '心碎', '蛋糕', '闪电', '炸弹', '刀', '足球', '瓢虫', '便便', '月亮', '太阳', '礼物', '拥抱', '强', '弱', '握手', '胜利', '抱拳', '勾引', '拳头', '差劲', '爱你', 'NO', 'OK', '爱情', '飞吻', '跳跳', '发抖', '怄火', '转圈', '磕头', '回头', '跳绳', '挥手', '激动', '街舞', '献吻', '左太极', '右太极']
-        
+
         const emojiBtnClick = ()=>{
             textarea.value.focus()
             isShowEmoji.value = !isShowEmoji.value
@@ -60,6 +55,11 @@ export default {
             emit("inputWrapperCancel")
         }
 
+        // 回复评论
+        const replyClick = ()=>{
+            emit("inputWrapperSave",commentText.value)
+        }
+
         return{
             textarea,
             isShowEmoji,
@@ -69,8 +69,9 @@ export default {
             emojiBtnClick,
             emojiClick,
             cancelClick,
+            replyClick,
 
-            IMG_URL
+            IMG_URL,
         }
     }
 }

@@ -3,25 +3,26 @@
         <el-row :gutter="15">
             <el-col :md="18" :xs="24">
                 <div class="article-wrapper v-card" :style="{background:getThemeConfig('mainCardBg')}">
-                    <articles-content/>
+                    <articles-content :articleContent="articleDetail.articleContent"/>
                     <articles-copyright/>
                     <articles-operation/>
-                    <articles-reward/>
-                    <articles-pagination/>
-                    <articles-recommend/>
+                    <articles-reward :likeCount="articleDetail.likeCount"/>
+                    <articles-pagination :nextArticleId="articleDetail.nextArticleId" :lastArticleId="articleDetail.lastArticleId"/>
+                    <articles-recommend :recommendArticles="articleDetail.recommendArticles"/>
                     <hr/>
-                    <articles-comment :isShowIcon="true"/>
-                    <comment-input-wrapper/>
-                    
-                    <articles-comment :isShowIcon="false" :commentNum="2"/>
-                    <comment-tree :commentDataTree="commentList"/>
+                    <articles-comment :isCommentView="false"/>
+                    <talk-comment @commentSave="handleCommentSave"/>
+                    <articles-comment :isCommentView="true" 
+                                      :commentCount="articleDetail.commentCount"
+                                      :commentList="articleComment"
+                    />
                 </div>
             </el-col>
             <el-col :md=6 :xs="24">
                 <div class="right-container">
                     <articles-catalog mode='topic' title="目录"></articles-catalog>
 
-                    <articles-catalog class="articles-mode" mode='articles' title="最新文章">
+                    <articles-catalog class="articles-mode" mode='articles' title="最新文章" :newArticles="articleDetail.newArticles">
                         <i class="iconfont" style="font-size:20px;color:#e53935">&#xe638;</i>
                     </articles-catalog>
                 </div>
@@ -30,7 +31,8 @@
     </div>
 </template>
 <script>
-import {ref} from 'vue'
+import {useStore} from 'vuex'
+import { ElMessage } from 'element-plus'
 
 import ArticlesContent from './ArticlesContent.vue'
 import ArticlesCatalog from './ArticlesCatalog.vue'
@@ -41,12 +43,22 @@ import ArticlesPagination from './ArticlesPagination.vue'
 import ArticlesRecommend from './ArticlesRecommend.vue'
 import ArticlesComment from './ArticlesComment.vue'
 
-import CommentInputWrapper from '@component/common/CommentInputWrapper.vue'
-import CommentTree from '@component/common/CommentTree.vue'
+import TalkComment from '@component/common/TalkComment.vue'
+import Comment from '@component/common/Comment.vue'
 
 import { useGetters } from '@/hook/common/useGetters';
-import emitter from '../../../eventbus/index'
+import {postSaveComment} from '@network/comment'
 export default {    
+    props:{
+        articleDetail:{
+            type:Object,
+            default(){return {}}
+        },
+        articleComment:{
+            type:Array,
+            default(){return []}
+        }
+    },
     components:{
         ArticlesContent,
         ArticlesCatalog,
@@ -57,18 +69,36 @@ export default {
         ArticlesRecommend,
         ArticlesComment, 
 
-        CommentInputWrapper,
-        CommentTree
+        TalkComment,
+        Comment
     },
 
-    setup(){
-        const commentList = ref([])
-        emitter.on('articlesComment',(res)=>{
-            commentList.value = res
-        })
+    setup(props){
+        const store = useStore()
+        const handleCommentSave = (commentContent)=>{
+            const commentInfo = {
+                articleId: props.articleDetail.id,
+                commentContent: commentContent,
+                parentId: 0,
+                replyUserId: 1,
+                userId: 1
+            }
+            
+            postSaveComment(commentInfo)
+            .then(res=>{
+                store.dispatch("articlesModule/setupArticleComment",props.articleDetail.id)
+                ElMessage({
+                    message: '发布评论成功！',
+                    type: 'success',
+                })
+            })
+            .catch(err=>{
+                ElMessage.error('评论出错...')
+            })
+        }
         return {
             ...useGetters("themeModule",["getThemeConfig"]),
-            commentList
+            handleCommentSave
         }
     }
 }
