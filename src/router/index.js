@@ -24,16 +24,18 @@ const routes = [
     {
         path:"/categories",
         component:()=>import("../view/Categories/Categories.vue"),
-        children:[
-            {
-                path:":id",
-                component:()=>import("../view/Categories/Categories.vue")
-            }
-        ]
+    },
+    {
+        path:"/categories/:id",
+        component:()=>import("../components/content/ArticlesList.vue")
     },
     {
         path:"/tag",
-        component:()=>import("../view/TagCloud/TagCloud.vue")
+        component:()=>import("../view/TagCloud/TagCloud.vue"),
+    },
+    {
+        path:"/tag/:id",
+        component:()=>import("../components/content/ArticlesList.vue")
     },
     {
         path:"/albums",

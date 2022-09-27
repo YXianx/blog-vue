@@ -1,25 +1,25 @@
 <template lang="">
 <div class="link-item v-card">
-    <a href="http://xianx.top/">
-        <img :src="srcList[id]" alt="">
+    <a :href="linkInfo.linkAddress">
+        <img :src="linkInfo.linkAvatar" alt="">
     </a>
     <div class="link-info">
         <div class="link-detail">
             <div class="title">
                 <a href="http://xianx.top/">
-                    Xianx的个人博客
+                    {{linkInfo.linkName}}
                 </a>
             </div>
-            <span>2022-12-02 13:12</span>
+            <span>{{linkInfo.createTime}}</span>
             <div class="desc">
-                这是一个简单的个人博客，也是记录笔记的地方，欢迎到访。
+                {{linkInfo.linkIntro}}
             </div>
         </div>
         <hr/>
         <div class="link-addr">
-            <a href="http://xianx.top">
+            <a :href="linkInfo.linkAddress">
                 <i class="iconfont">&#xe63b;</i>
-                http://xianx.top/
+                {{linkInfo.linkAddress}}
             </a>
         </div>
     </div>
@@ -29,22 +29,14 @@
 import {IMG_URL} from '@const/index.js'
 export default {
     props:{
-        id:0
+        linkInfo:{
+            type: Object,
+            default(){return {}}
+        }
     },
     setup(){
-        const srcList = [
-            IMG_URL + "tag_bg_1.webp",
-            IMG_URL + "tag_bg_2.webp",
-            IMG_URL + "tag_bg_3.webp",
-            IMG_URL + "tag_bg_4.webp",
-            IMG_URL + "tag_bg_5.webp",
-            IMG_URL + "tag_bg_6.webp",
-            IMG_URL + "tag_bg_7.webp",
-            IMG_URL + "tag_bg_8.webp"
-        ]
-
         return {
-            srcList
+            
         }
     }
 }

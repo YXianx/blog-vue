@@ -14,11 +14,12 @@
             <comment v-for="(item,index) in commentList"
                      :commentData="item" 
                      :floor="commentList.length-index"
-            /> 
+            />
         </div>
     </div>
 </template>
 <script>
+// TODO:评论模块：发布评论后，数据不能动态更新。回复评论后，评论数不能动态更新 
 import Comment from '@component/common/Comment.vue'
 
 export default {

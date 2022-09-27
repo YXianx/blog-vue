@@ -9,72 +9,36 @@
             </template>
         </banner>
         <div class="tag-container v-card">
-            <div class="title">标签 - 14</div>
+            <div class="title">标签 - {{tags.length}}</div>
             <ul class="tag-list">
-                <li class="tag-item" v-for="item in tags">
-                    <router-link :to="item.path" :style="{fontSize:Math.floor(Math.random()*(26-18)+18)+'px'}">{{item.name}}</router-link>
+                <li class="tag-item" v-for="item in tags"> 
+                    <router-link :to="'/tag/'+item.id" :style="{fontSize:Math.floor(Math.random()*(26-18)+18)+'px'}">{{item.tagName}}</router-link>
                 </li>
             </ul>
         </div>
     </div>
 </template>
 <script>
-import {computed} from 'vue'
+import {ref,computed} from 'vue'
+import {useRoute} from 'vue-router'
+
+import {getTagsList,getTagArticles} from '@network/tags'
 import {IMG_URL} from '@const/index.js'
 export default {
+    components:{
+    
+    },
     setup(){
-        const tags = [
-            {
-                name:"Vue",
-                path:"/home"
-            },
-            {
-                name:"项目",
-                path:"/home"
-            },
-            {
-                name:"生活随笔",
-                path:"/home"
-            },
-            {
-                name:"Less",
-                path:"/home"
-            },
-            {
-                name:"TypeScript",
-                path:"/home"
-            },
-            {
-                name:"Vuex",
-                path:"/home"
-            },
-            {
-                name:"Vue-Router",
-                path:"/home"
-            },
-            {
-                name:"小程序",
-                path:"/home"
-            },
-            {
-                name:"uni-app",
-                path:"/home"
-            },
-            {
-                name:"TypeScript",
-                path:"/home"
-            },
-            {
-                name:"TypeScript",
-                path:"/home"
-            },
-            {
-                name:"TypeScript",
-                path:"/home"
-            }
-        ]
+        // tag标签字体随机大小
         const randomFontSize = computed(()=>{
             return Math.floor(Math.random()*17);
+        })
+
+        // 请求标签列表
+        const tags = ref([])
+        getTagsList()
+        .then(res=>{
+            tags.value = res.data.data
         })
 
         return {

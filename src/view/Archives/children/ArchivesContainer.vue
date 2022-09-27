@@ -1,18 +1,24 @@
 <template lang="">
     <div class="archives-container v-card">
         <ul class="time-line">
-            <li class="time-title">目前共计9篇文章，继续加油</li>
-            <li class="time-item" v-for="item in 9">
-                <span>2022-9-3</span>
-                <router-link to="/home">我的2022</router-link>
+            <li class="time-title">目前共计{{archiveList.length}}篇文章，继续加油</li>
+            <li class="time-item" v-for="item in archiveList">
+                <span>{{item.createTime}}</span>
+                <router-link to="/home">{{item.articleTitle}}</router-link>
             </li>
         </ul>
     </div>
 </template>
 <script>
 // TODO:后期数据增多则添加页码分页
+// TODO:归档项跳转到对应博客文章
 export default {
-    
+    props:{
+        archiveList:{
+            type: Array,
+            default(){return []}
+        }
+    }
 }
 </script>
 <style lang="less">

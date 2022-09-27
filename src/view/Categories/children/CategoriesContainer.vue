@@ -2,14 +2,13 @@
     <div class="categories-view">
         <router-view>
             <transition name="detail" mode="out-in"> 
-                <component v-if="route.params.id" is="CategoriesDetail"></component>
-                <div v-else class="categories-container" :style="!route.params.id?'padding:50px 40px;':''" :class="!route.params.id?'v-card':''">
-                    <div class="categories-title">分类 - 6</div>
+                <div class="categories-container" :style="!route.params.id?'padding:50px 40px;':''" :class="!route.params.id?'v-card':''">
+                    <div class="categories-title">分类 - {{categoryList.length}}</div>
                     <ul class="categories-list">
-                        <li class="categories-item" v-for="(item,index) in 6">
-                            <router-link :to="'/categories/'+index">
-                                项目介绍
-                                <span>(3)</span>
+                        <li class="categories-item" v-for="(item,index) in categoryList">
+                            <router-link :to="'/categories/'+item.id">
+                                {{item.categoryName}}
+                                <span>(?)</span>
                             </router-link>
                         </li>
                     </ul>
@@ -19,19 +18,22 @@
     </div>
 </template>
 <script>
+import {ref} from 'vue'
 import {useRoute} from 'vue-router'
 
-import CategoriesDetail from './CategoriesDetail.vue'
+import {getCategoryList} from '@network/categories.js'
 export default {
-    components:{
-        CategoriesDetail
-    },
-
     setup(){
         const route = useRoute()
+        const categoryList = ref([])
+        getCategoryList()
+        .then(res=>{
+            categoryList.value = res.data.data
+        })
 
         return {
-            route
+            route,
+            categoryList
         }
     }
 }

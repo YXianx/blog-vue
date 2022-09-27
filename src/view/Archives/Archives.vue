@@ -8,19 +8,28 @@
                 <h1>归档</h1>
             </template>
         </banner>
-        <archives-container class="container"/>
+        <archives-container class="container" :archiveList="archives"/>
     </div>
 </template> 
 <script> 
+import {ref} from 'vue'
 import ArchivesContainer from './children/ArchivesContainer.vue'
+import {getArchivesList} from '@network/archives'
 import {IMG_URL} from '@const/index.js'
 export default {
     components:{
         ArchivesContainer
     },
     setup(){
+        const archives = ref([])
+        getArchivesList(1,10)
+        .then(res=>{
+            archives.value = res.data.data.archives
+        })
+
         return {
-            IMG_URL
+            IMG_URL,
+            archives
         }
     }
 }

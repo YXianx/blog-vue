@@ -1,17 +1,27 @@
 <template lang="">
     <div class="blog-wrapper">
         <div class="blogger-info">
-            <img :src="wrapperData.bloggerHeadUrl" alt="">
+            <img :src="wrapperData.avatar" alt="">
         </div>
         <div class="blogger-name">
-            {{wrapperData.blogger}}
+            {{wrapperData.nickName}}
         </div>
-        <div class="blogger-phrase">{{wrapperData.phrase}}</div>
+        <div class="blogger-phrase">{{wrapperData.intro}}</div>
         <div class="blog-info-wrapper">
-            <div class="blog-info-data" v-for="item in wrapperData.infoData">
-                <router-link to="/home">
-                    <div class="info-title">{{item.name}}</div>
-                    <div class="info-num">{{item.number}}</div>
+            <div class="blog-info-data">
+                <router-link to="/archives">
+                    <div class="info-title">文章</div>
+                    <div class="info-num">{{wrapperData.articleCount}}</div>
+                </router-link>
+
+                <router-link to="/categories">
+                    <div class="info-title">分类</div>
+                    <div class="info-num">{{wrapperData.categoryCount}}</div>
+                </router-link>
+
+                <router-link to="/tag">
+                    <div class="info-title">标签</div>
+                    <div class="info-num">{{wrapperData.tagCount}}</div>
                 </router-link>
             </div>
         </div>
@@ -33,29 +43,14 @@ export default {
         wrapperData:{
             type:Object,
             default(){
-                return {
-                    blogger:"贤先生x",
-                    phrase:"超爱吃白切鸡",
-                    bloggerHeadUrl:IMG_URL + 'user_head.webp',
-                    infoData:[
-                        {
-                            name:"文章",
-                            path:"/home",
-                            number:5
-                        },
-                        {
-                            name:"分类",
-                            path:"/home",
-                            number:4
-                        },
-                        {
-                            name:"标签",
-                            path:"/home",
-                            number:5
-                        }
-                    ]
-                }
+                return {}
             }
+        }
+    },
+
+    setup(){
+        return {
+            IMG_URL
         }
     }
 }
@@ -108,9 +103,21 @@ export default {
             padding: 12px 10px 0;
 
             .blog-info-data{
+                display: flex;
                 text-align: center;
                 line-height: 2;
                 font-size: 0.875rem;
+                a{
+                    margin: 0 20px;
+                    .info-title{
+                        transition: color 300ms;
+                    }
+                    &:hover{
+                        .info-title{
+                            color: var(--color-high-text);
+                        }
+                    }
+                }
             }
         }    
         .social-info{

@@ -1,39 +1,52 @@
 <template lang="">
     <el-col :md="8" :span="24">
         <div class="article-item v-card">
-            <router-link to="/home" v-slot="slotProps" custom>
+            <router-link :to="'/articles/'+articleData.id" v-slot="slotProps" custom>
                 <div class="article-img" @click="slotProps.navigate">
                     <img :src="IMG_URL + 'blog_bg_3.webp'" alt="">
                 </div>
             </router-link>
             <div class="article-info">
-                <div class="title">项目部署介绍</div>
+                <div class="title">{{articleData.articleTitle}}</div>
                 <div class="info" style="margin-top:10px">
                     <div>
                         <i class="iconfont">&#xe659;</i>
-                        2022-03-21
+                        {{replaceDateT(articleData.createTime)}}
                     </div>
                     <router-link to="/home" >
                         <i class="iconfont">&#xe6aa;</i>
-                        项目介绍
+                        {{articleData.categoryName}}
                     </router-link>
                 </div>
             </div>
             <hr class="article-line"/>
             <div class="tag-wrapper">
-                <router-link to="/home">项目</router-link>
-                <router-link to="/home">vue</router-link>
+                <router-link :to="'/tag/'+item.id" v-for="item in articleData.tags">{{item.tagName}}</router-link>
             </div>
         </div>
     </el-col>   
 </template>
 <script>
+import {computed} from 'vue'
 import {IMG_URL} from '@const/index.js'
 
 export default {
+    props:{
+        articleData:{
+            type: Object,
+            default(){return {}}
+        }
+    },
     setup(){
+        const replaceDateT = computed(()=>{
+            return (date)=>{
+                return date.replace("T"," ")
+            }
+        })
+
         return{
-            IMG_URL
+            IMG_URL,
+            replaceDateT
         }
     }
 }

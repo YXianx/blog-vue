@@ -2,18 +2,32 @@
     <div class="link-container v-card">
         <div class="link-list">
             <el-row>
-                <el-col :md="12" v-for="(item,index) in 6">
-                    <link-item style="margin:20px auto" :id="index"/>
+                <el-col :md="12" v-for="(item,index) in linkList">
+                    <link-item style="margin:20px auto" :linkInfo="item"/>
                 </el-col>
             </el-row>
         </div>
     </div>
 </template>
-<script>
+<script> 
+import {ref} from 'vue'
 import LinkItem from './LinkItem.vue'
+import {getLinkList} from '@network/links.js'
 export default {
     components:{
         LinkItem
+    },
+
+    setup(){
+        const linkList = ref([])
+        getLinkList()
+        .then(res=>{
+            console.log(res.data.data)
+            linkList.value = res.data.data
+        })
+        return{
+            linkList
+        }
     }
 }
 </script>

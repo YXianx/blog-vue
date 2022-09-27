@@ -2,24 +2,23 @@
     <div class="blog-card v-card">
         <div :class="imgOrder?'left-radius':'right-radius'">
             <router-link :to="'/articles/' + articleData.id">
-                <!-- <img :src="articleData.articleCover" alt=""> -->
                 <el-image :src="articleData.articleCover" style="height:100%"></el-image>
             </router-link>
         </div>
         <div class="ariticle-content">
             <div class="ariticle">
                 <div class="title">
-                    <router-link to="/articles">{{articleData.articleTitle}}</router-link>
+                    <router-link :to="'/articles' + articleData.id">{{articleData.articleTitle}}</router-link>
                 </div>
                 <div class="info">
-                    <i class="iconfont">&#xeb3f;</i> {{articleData.createTime}}
+                    <i class="iconfont">&#xeb3f;</i> {{replaceDateT(articleData.createTime)}}
                     <span class="separator">|</span>
-                    <router-link to="/articles">
+                    <router-link :to="'/categories/' + articleData.categoryId">
                         <i class="iconfont">&#xe6aa;</i> {{articleData.categoryName}}
                     </router-link>
                     <span class="separator">|</span>
                     <!-- 对tag标签v-for -->
-                    <router-link class="tag" :to="'/articles/'+ articleData.id" v-for="tag in articleData.tags">
+                    <router-link class="tag" :to="'/tag/'+ tag.id" v-for="tag in articleData.tags">
                         <i class="iconfont">&#xe615;</i>{{tag.tagName}}
                     </router-link>
                 </div>
@@ -29,6 +28,7 @@
     </div>
 </template>
 <script>
+import {computed} from 'vue'
 import {IMG_URL} from '@const/index.js'
 export default {
     props:{
@@ -46,8 +46,14 @@ export default {
     },
 
     setup(props){
+        const replaceDateT = computed(()=>{
+            return (date)=>{
+                return date.replace("T"," ")
+            }
+        })
         return {
-            IMG_URL
+            IMG_URL,
+            replaceDateT
         }
     }
 }

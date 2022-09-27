@@ -8,7 +8,7 @@
                 />
             </el-col>
             <el-col class="el-wrapper" :md="6" :xs="24">
-                <blog-wrapper class="wrapper"/>
+                <blog-wrapper class="wrapper" :wrapperData="userInfo"/>
             </el-col>
         </el-row>
     </div>
@@ -21,6 +21,7 @@ import emitter from '../../../eventbus/index'
 import BlogCard from '../../../components/content/BlogCard.vue';
 import BlogWrapper from '../../../components/content/BlogWrapper.vue';
 
+import {getHomeUserInfo} from '@network/home.js'
 import {useGetters} from '@hook/index'
 export default {
     emit:["homeContainerTop"], 
@@ -42,8 +43,17 @@ export default {
             offsetTop = homeContainerRef.value.offsetTop
             emitter.emit('homeContainerTop',offsetTop)
         })
+        
+        // 3、请求用户首页信息
+        const userInfo = ref({})
+        getHomeUserInfo()
+        .then(res=>{
+            userInfo.value = res.data.data
+        }) 
+
         return {
             homeContainerRef,
+            userInfo,
             ...useGetters("articlesModule",["getArticlesList"])
         }
     }
