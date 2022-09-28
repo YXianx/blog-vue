@@ -14,6 +14,7 @@ import {useRoute} from 'vue-router'
 import ArticlesBanner from './children/ArticlesBanner.vue';
 import ArticlesContainer from './children/ArticlesContainer.vue';
  
+import emitter from '../../eventbus/index'
 import { useGetters } from '@/hook';
 export default { 
     components:{
@@ -30,6 +31,9 @@ export default {
         store.dispatch('articlesModule/setupArticleDetail',id)
         store.dispatch('articlesModule/setupArticleComment',id)
 
+        emitter.on('updateCommentState',()=>{
+            console.log("update")
+        })
         return {
             ...useGetters("articlesModule",["getArticlesDetail","getArticlesComment"])
         }

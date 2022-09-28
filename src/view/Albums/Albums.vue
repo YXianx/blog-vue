@@ -46,14 +46,14 @@ export default {
         // hook：watch监听二级路由进入同个组件
         // const {params} = useWatchRoute()
         const route = useRoute()
-        const ClearWatch = watch(route,(newValue,oldValue)=>{
-            let path = newValue.path
-            if(/\/.+\/.+/.test(path)){
-                console.log("enter children route")
-            }else{
-                console.log("enter route")
-            }
-        })
+        // const ClearWatch = watch(route,(newValue,oldValue)=>{
+        //     let path = newValue.path
+        //     if(/\/.+\/.+/.test(path)){
+        //         console.log("enter children route")
+        //     }else{
+        //         console.log("enter route")
+        //     }
+        // })
 
         const srcList = [
             IMG_URL + "tag_bg_1.webp",

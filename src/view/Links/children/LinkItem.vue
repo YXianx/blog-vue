@@ -1,23 +1,23 @@
 <template lang="">
 <div class="link-item v-card">
-    <a :href="linkInfo.linkAddress">
+    <a :href="'http://' + linkInfo.linkAddress">
         <img :src="linkInfo.linkAvatar" alt="">
     </a>
     <div class="link-info">
         <div class="link-detail">
             <div class="title">
-                <a href="http://xianx.top/">
+                <a :href="'http://' + linkInfo.linkAddress">
                     {{linkInfo.linkName}}
                 </a>
             </div>
-            <span>{{linkInfo.createTime}}</span>
+            <span>{{replaceDateT(linkInfo.createTime)}}</span>
             <div class="desc">
                 {{linkInfo.linkIntro}}
             </div>
         </div>
         <hr/>
         <div class="link-addr">
-            <a :href="linkInfo.linkAddress">
+            <a :href="'http://' + linkInfo.linkAddress">
                 <i class="iconfont">&#xe63b;</i>
                 {{linkInfo.linkAddress}}
             </a>
@@ -26,6 +26,7 @@
 </div>
 </template>
 <script>
+import {computed} from 'vue'
 import {IMG_URL} from '@const/index.js'
 export default {
     props:{
@@ -35,8 +36,14 @@ export default {
         }
     },
     setup(){
+        const replaceDateT = computed(()=>{
+            return (date)=>{
+                return date.replace("T"," ")
+            }
+        })
+
         return {
-            
+            replaceDateT    
         }
     }
 }

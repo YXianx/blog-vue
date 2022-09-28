@@ -22,7 +22,6 @@ export default {
         const linkList = ref([])
         getLinkList()
         .then(res=>{
-            console.log(res.data.data)
             linkList.value = res.data.data
         })
         return{

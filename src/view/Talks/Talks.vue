@@ -8,6 +8,7 @@
                 <h1>说说</h1>
             </template>
         </banner>
+        <div class="container v-card">暂未开发。。。</div>
     </div>
 </template>
 <script>
@@ -21,5 +22,13 @@ export default {
 }
 </script>
 <style lang="less">
-    
+    .container{
+        padding: 40px 30px;
+    }
+    @media (min-width:759px){
+        .container{
+            width: 1200px;
+            margin: 40px auto 40px auto;
+        }
+    }
 </style>

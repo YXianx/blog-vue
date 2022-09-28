@@ -44,17 +44,17 @@ export default {
         const title = ref("")
         const articleList = ref([])
         if(route.path.indexOf('/tag') === 0){
-            title.value = `标签 - ?`
             getTagArticles(route.params.id)
             .then(res=>{
-                articleList.value = res.data.data
+                articleList.value = res.data.data.articlePreViewList
+                title.value = `标签 - ${res.data.data.name}`
             })
         }
         else if(route.path.indexOf('/categories') === 0){
-            title.value = `分类 - ?`
             getCategoryArticles(route.params.id)
             .then(res=>{
-                articleList.value = res.data.data
+                articleList.value = res.data.data.articlePreViewList
+                title.value = `分类 - ${res.data.data.name}`
             })
         }
 

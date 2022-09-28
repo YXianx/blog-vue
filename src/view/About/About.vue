@@ -22,7 +22,7 @@
                 <div class="tag-item">WPF</div>
             </div>
             <div class="about-list">
-                <p>我是贤先生。</p>
+                <p>我是怡贤</p>
                 <p>大三</p>
                 <p>一名前端码农、白日梦想家</p>
                 <p>热爱吉他、摄影、数码产品...</p>

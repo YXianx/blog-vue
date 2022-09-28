@@ -4,7 +4,7 @@
             <li class="time-title">目前共计{{archiveList.length}}篇文章，继续加油</li>
             <li class="time-item" v-for="item in archiveList">
                 <span>{{item.createTime}}</span>
-                <router-link to="/home">{{item.articleTitle}}</router-link>
+                <router-link :to="'/articles/' + item.id">{{item.articleTitle}}</router-link>
             </li>
         </ul>
     </div>

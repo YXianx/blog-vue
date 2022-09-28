@@ -24,6 +24,7 @@ export default {
         const archives = ref([])
         getArchivesList(1,10)
         .then(res=>{
+            console.log(res.data.data)
             archives.value = res.data.data.archives
         })
 

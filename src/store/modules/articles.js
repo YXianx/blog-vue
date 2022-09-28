@@ -33,6 +33,8 @@ export const articlesModule = {
 
         setArticleComment(state,payload){
             state.articleComment = payload
+            state.articleComment.push('')
+            state.articleComment.pop()
         },
 
         setArticleList(state,payload){

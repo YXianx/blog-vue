@@ -97,6 +97,7 @@ export default {
             })
         }
         return {
+            // ...useGetters("articlesModule",["getArticlesComment"]),
             ...useGetters("themeModule",["getThemeConfig"]),
             handleCommentSave
         }
