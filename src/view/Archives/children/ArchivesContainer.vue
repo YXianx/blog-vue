@@ -11,7 +11,6 @@
 </template>
 <script>
 // TODO:后期数据增多则添加页码分页
-// TODO:归档项跳转到对应博客文章
 export default {
     props:{
         archiveList:{

@@ -10,6 +10,7 @@
                 评论 {{commentCount}}
             </div>
         </div>    
+        
         <div v-if="isCommentView && commentList.length>0" class="comment-view">
             <comment v-for="(item,index) in commentList"
                      :commentData="item" 
@@ -22,7 +23,7 @@
 // TODO:评论模块：发布评论后，数据可以动态更新但是内容却没有变化还是上个评论的内容。
 // TODO:评论数没实时变化
 import {nextTick} from 'vue'
-import Comment from '@component/common/Comment.vue'
+import Comment from '@component/common/Comment.vue' 
 import {useGetters} from '@hook/index'
 export default {
     components:{

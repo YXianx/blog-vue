@@ -56,9 +56,15 @@ export const articlesModule = {
             })
         }, 
         setupArticleComment({commit},payload){
-            getArticlesComment(payload)
-            .then(res=>{
-                commit("setArticleComment",res.data.data)
+            return new Promise((resolve,reject)=>{
+                getArticlesComment(payload)
+                .then(res=>{
+                    commit("setArticleComment",res.data.data)
+                    resolve()
+                })
+                .catch(err=>{
+                    reject()
+                })
             })
         }
     }

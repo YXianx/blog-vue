@@ -11,7 +11,7 @@
                 <span class="reply" @click="replyClick(commentData.parentId!=0?commentData.parentId:commentData.id)">回复</span>
             </div>
             <div class="comment-content">
-                <p>{{commentContent}}</p>
+                <p>{{commentData.commentContent}}</p>
             </div>
 
             <reply-comment v-if="isShowReply" 
@@ -76,8 +76,9 @@ export default {
             parentId.value = commentId
         }
 
-        // 评论表情转标签
-        const commentContent = props.commentData.commentContent
+        // 评论表情转标签 
+        // BUG问题: 使用commentContent作为评论显示内容会导致content内容不是最新的内容而是上一条评论的内容，需要刷新或者强制v-if刷新dom才会显示新评论内容
+        // const commentContent = props.commentData.commentContent
         
 
         // 点赞数
@@ -104,9 +105,13 @@ export default {
                 handleCancelEvent()
                 // 更新评论列表
                 store.dispatch("articlesModule/setupArticleComment",articleId.value)
-                ElMessage({
-                    message: '回复评论成功！',
-                    type: 'success',
+                .then(res=>{
+                    // 更新评论数
+                    store.dispatch('articlesModule/setupArticleDetail',articleId.value)
+                    ElMessage({
+                        message: '回复成功！',
+                        type: 'success',
+                    })
                 })
             })
             .catch(err=>{
@@ -149,7 +154,7 @@ export default {
             likeClick,
             isLike,
 
-            commentContent
+            // commentContent
         }
     }
 }

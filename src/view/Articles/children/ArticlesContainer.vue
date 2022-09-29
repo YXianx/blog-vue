@@ -31,12 +31,14 @@
     </div>
 </template>
 <script>
+// TODO:(已解决BUG)评论发布 就当文章没有评论发布第一条评论时，响应式正常，第二条开始发布就会重复上一条的内容，虽然能获取到数量变化for出来，但是内容却是有问题的
+import {ref} from 'vue'
 import {useStore} from 'vuex'
 import { ElMessage } from 'element-plus'
 
 import ArticlesContent from './ArticlesContent.vue'
 import ArticlesCatalog from './ArticlesCatalog.vue'
-import ArticlesCopyright from './ArticlesCopyright.vue';
+import ArticlesCopyright from './ArticlesCopyright.vue'
 import ArticlesOperation from './ArticlesOperation.vue'
 import ArticlesReward from './ArticlesReward.vue'
 import ArticlesPagination from './ArticlesPagination.vue'
@@ -46,8 +48,9 @@ import ArticlesComment from './ArticlesComment.vue'
 import TalkComment from '@component/common/TalkComment.vue'
 import Comment from '@component/common/Comment.vue'
 
-import { useGetters } from '@/hook/common/useGetters';
+import { useGetters } from '@/hook/common/useGetters'
 import {postSaveComment} from '@network/comment'
+
 export default {    
     props:{
         articleDetail:{
@@ -86,18 +89,23 @@ export default {
             
             postSaveComment(commentInfo)
             .then(res=>{
+                // 更新评论列表
                 store.dispatch("articlesModule/setupArticleComment",props.articleDetail.id)
-                ElMessage({
-                    message: '发布评论成功！',
-                    type: 'success',
+                .then(res=>{
+                    // 更新评论数
+                    store.dispatch('articlesModule/setupArticleDetail',props.articleDetail.id)
+                    ElMessage({
+                        message: '发布评论成功！',
+                        type: 'success',
+                    })
                 })
             })
             .catch(err=>{
                 ElMessage.error('评论出错...')
             })
         }
+
         return {
-            // ...useGetters("articlesModule",["getArticlesComment"]),
             ...useGetters("themeModule",["getThemeConfig"]),
             handleCommentSave
         }
