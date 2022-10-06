@@ -1,19 +1,21 @@
-# blog-vue
+# Blog-Vue · 个人博客系统
 
-## Project setup
-```
-npm install
-```
+## 项目概述
+- 项目兼容PC端和移动端
+- 前端采用vue3全家桶（vue3 + vue-router + vuex
+- UI组件库采用Element-plus
+- 项目图片采用云存储（七牛云
+- 部署在腾讯云服务器
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## 团队协作
+一个不知名的小作坊二人团... （第一次和朋友联合开发，前后端结合，团队协作
+- 前端：YXianx
+- 后端：黄叶
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## 界面UI
+界面ui参考风神的博客写的，以风神博客的UI为参考，代码方面都是自己写的,仅参考UI界面，开发属于自己的博客系统，该项目作为自己的练手项目还是很不错的。
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 博客上线地址
+[YXianx的个人博客](xianx.top)
+
+### 目前只基本写好了前台博客页面（还有一些待优化的细节ovo)，后台管理系统也还在开发中......
