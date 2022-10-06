@@ -14,7 +14,7 @@
 <script> 
 import {ref} from 'vue'
 import ArchivesContainer from './children/ArchivesContainer.vue'
-import {getArchivesList} from '@network/archives'
+import {getArchivesList} from '@network/archives/archives'
 import {IMG_URL} from '@const/index.js'
 export default {
     components:{

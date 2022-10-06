@@ -12,7 +12,7 @@
 <script> 
 import {ref} from 'vue'
 import LinkItem from './LinkItem.vue'
-import {getLinkList} from '@network/links.js'
+import {getLinkList} from '@network/links/links.js'
 export default {
     components:{
         LinkItem

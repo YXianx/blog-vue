@@ -1,4 +1,4 @@
-import {request} from './request'
+import yxRequest from '../index'
 
 /**
  * 获取归档列表
@@ -7,7 +7,7 @@ import {request} from './request'
  * @returns 
  */
 export function getArchivesList(page=1,size=10){
-    return request({
+    return yxRequest.get({
         url: `/articles/archives?current=${page}&size=${size}`
     })
 }

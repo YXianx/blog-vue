@@ -24,6 +24,9 @@
     "@vue/cli-service": "~5.0.0",
     "less-loader": "^11.0.0",
     "style-resources-loader": "^1.5.0",
+    "unplugin-auto-import": "^0.11.2",
+    "unplugin-element-plus": "^0.4.1",
+    "unplugin-vue-components": "^0.22.8",
     "vue-cli-plugin-style-resources-loader": "^0.1.5"
   }
 }

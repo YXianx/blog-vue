@@ -23,8 +23,8 @@ import {useRoute} from 'vue-router'
 import Banner from '@component/content/Banner.vue'
 import ArticleItem from '@component/content/ArticleItem.vue'
 
-import {getTagArticles} from '@network/tags.js'
-import {getCategoryArticles} from '@network/categories.js'
+import {getTagArticles} from '@network/tags/tags.js'
+import {getCategoryArticles} from '@network/categories/categories.js'
 
 import {IMG_URL} from '@const/index'
 export default {

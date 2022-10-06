@@ -8,7 +8,7 @@
                         <li class="categories-item" v-for="(item,index) in categoryList">
                             <router-link :to="'/categories/'+item.id">
                                 {{item.categoryName}}
-                                <span>(?)</span>
+                                <span>({{item.count}})</span>
                             </router-link>
                         </li>
                     </ul>
@@ -21,7 +21,7 @@
 import {ref} from 'vue'
 import {useRoute} from 'vue-router'
 
-import {getCategoryList} from '@network/categories.js'
+import {getCategoryList} from '@network/categories/categories.js'
 export default {
     setup(){
         const route = useRoute()

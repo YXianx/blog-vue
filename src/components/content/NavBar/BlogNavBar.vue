@@ -21,7 +21,7 @@
                 <div class="right-menu">
                     <menu-item :isRouter="false" @click="spotLightClick" :inTop="slotProps.inTop" title="搜索" :iconfont="'\ue752'" />
                     <menu-item to="/home" :inTop="slotProps.inTop" title="首页" :iconfont="'\ue608'"/>
-                    <menu-item to="/home" :inTop="slotProps.inTop" 
+                    <menu-item to="/archives" :inTop="slotProps.inTop" 
                                           title="发现" 
                                           :iconfont="'\ue6c6'" 
                                           :isSubMenu="true"
@@ -30,7 +30,7 @@
                                                 {to:'/categories',title:'分类',iconfont:'\ue6aa'},
                                                 {to:'/tag',title:'标签',iconfont:'\ue615'}
                                           ]"/>
-                    <menu-item to="/search" :inTop="slotProps.inTop" 
+                    <menu-item to="/albums" :inTop="slotProps.inTop" 
                                             title="娱乐" 
                                             :iconfont="'\ue63a'" 
                                             :isSubMenu="true"

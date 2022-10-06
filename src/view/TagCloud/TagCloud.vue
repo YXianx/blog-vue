@@ -22,7 +22,7 @@
 import {ref,computed} from 'vue'
 import {useRoute} from 'vue-router'
 
-import {getTagsList,getTagArticles} from '@network/tags'
+import {getTagsList,getTagArticles} from '@network/tags/tags.js'
 import {IMG_URL} from '@const/index.js'
 export default {
     components:{

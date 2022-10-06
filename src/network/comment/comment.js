@@ -1,4 +1,4 @@
-import { request } from "./request";
+import yxRequest from '../index'
 
 /**
  * 新增评论
@@ -6,7 +6,7 @@ import { request } from "./request";
  * @returns 
  */
 export function postSaveComment(data){
-    return request({
+    return yxRequest.post({
         method:'POST',
         url:'/comments/save',
         data:data
@@ -15,7 +15,7 @@ export function postSaveComment(data){
 
 
 export function postLikeComment(id){
-    return request({
+    return yxRequest.post({
         method:'POST',
         url:`/comments/like/${id}`,
         data:{

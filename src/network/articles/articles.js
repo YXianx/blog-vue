@@ -1,11 +1,11 @@
-import { request } from "./request"; 
+import yxRequest from '../index'
 
 /**
  * 获取首页文章列表
  * @returns 返回首页文章列表
  */
 export function getArticlesList(){
-    return request({
+    return yxRequest.get({
         url:'/articles/home/list' 
     })
 }
@@ -16,7 +16,7 @@ export function getArticlesList(){
  * @returns 返回指定文章详情 
  */
 export function getArticlesDetail(id){
-    return request({
+    return yxRequest.get({
         url:`/articles/detail/${id}`
     })
 }
@@ -27,7 +27,7 @@ export function getArticlesDetail(id){
  * @returns 返回文章评论列表
  */
 export function getArticlesComment(id){
-    return request({
+    return yxRequest.get({
         url:`/comments/list/${id}`
     })
 }

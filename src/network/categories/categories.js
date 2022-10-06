@@ -1,11 +1,11 @@
-import {request} from './request'
+import yxRequest from '../index'
 
 /**
  * 获取分类列表
  * @returns 返回分类列表
  */
 export function getCategoryList(){
-    return request({
+    return yxRequest.get({
         url: '/category/list'
     })
 }
@@ -15,7 +15,7 @@ export function getCategoryList(){
  * @param {number} id 
  */
  export function getCategoryArticles(id){
-    return request({
+    return yxRequest.get({
         url:`/articles/condition?categoryId=${id}`,
     })
 }

@@ -49,7 +49,7 @@ import TalkComment from '@component/common/TalkComment.vue'
 import Comment from '@component/common/Comment.vue'
 
 import { useGetters } from '@/hook/common/useGetters'
-import {postSaveComment} from '@network/comment'
+import {postSaveComment} from '@network/comment/comment'
 
 export default {    
     props:{

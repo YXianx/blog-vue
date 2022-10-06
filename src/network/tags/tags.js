@@ -1,10 +1,10 @@
-import {request} from './request'
+import yxRequest from '../index'
 /**
  * 获取标签列表
  * @returns 标签列表
  */
 export function getTagsList(){
-    return request({
+    return yxRequest.get({
         url:'/tags/list'
     })
 }
@@ -14,7 +14,7 @@ export function getTagsList(){
  * @param {number} id 
  */
 export function getTagArticles(id){
-    return request({
+    return yxRequest.get({
         url:`/articles/condition?tagId=${id}`,
     })
 }

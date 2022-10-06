@@ -21,7 +21,7 @@ import emitter from '../../../eventbus/index'
 import BlogCard from '../../../components/content/BlogCard.vue';
 import BlogWrapper from '../../../components/content/BlogWrapper.vue';
 
-import {getHomeUserInfo} from '@network/home.js'
+import {getHomeUserInfo} from '@network/home/home.js'
 import {useGetters} from '@hook/index'
 export default {
     emit:["homeContainerTop"], 

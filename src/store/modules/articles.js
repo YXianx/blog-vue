@@ -1,10 +1,9 @@
 // 文章内容模块
-// TODO:文章页数据换成vuex存储
 import {
     getArticlesList,
     getArticlesDetail,
     getArticlesComment
-} from '@network/articles'
+} from '@network/articles/articles.js'
 
 export const articlesModule = {
     namespaced:true,

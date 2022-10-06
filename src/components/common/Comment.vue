@@ -36,7 +36,7 @@ import { ElMessage } from 'element-plus'
 import ReplyComment from './ReplyComment.vue'
 import Comment from './Comment.vue'
 
-import {postSaveComment,postLikeComment} from '@network/comment'
+import {postSaveComment,postLikeComment} from '@network/comment/comment'
 
 import {IMG_URL} from '@const/index.js'
 export default {
@@ -78,6 +78,7 @@ export default {
 
         // 评论表情转标签 
         // BUG问题: 使用commentContent作为评论显示内容会导致content内容不是最新的内容而是上一条评论的内容，需要刷新或者强制v-if刷新dom才会显示新评论内容
+        // BUG原因：数据未用ref所以是静态变量而非响应式变量，所以新发布的评论内容是上一条评论的内容！
         // const commentContent = props.commentData.commentContent
         
 
