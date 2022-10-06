@@ -1,19 +1,2 @@
-# blog-vue
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# 基于Vue3的前台博客页面
+- 目前只基本写好了前台博客页面，后台管理系统还在开发中......
