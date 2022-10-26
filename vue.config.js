@@ -11,11 +11,10 @@ function resolve(dir){
 
 module.exports = defineConfig({
   transpileDependencies: true,
-
   devServer: {
     proxy: {
       '^/api': {
-        target: "http://49.0.246.101:8888/",
+        target: "http://182.160.0.194:8888",
         pathRewrite: { 
           '^/api': '' 
         },
