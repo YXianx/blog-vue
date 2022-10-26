@@ -11,7 +11,7 @@
                     <router-link :to="'/articles' + articleData.id">{{articleData.articleTitle}}</router-link>
                 </div>
                 <div class="info">
-                    <i class="iconfont">&#xeb3f;</i> {{replaceDateT(articleData.createTime)}}
+                    <i class="iconfont">&#xeb3f;</i> {{replaceDateByT(articleData.createTime)}}
                     <span class="separator">|</span>
                     <router-link :to="'/categories/' + articleData.categoryId">
                         <i class="iconfont">&#xe6aa;</i> {{articleData.categoryName}}
@@ -30,6 +30,7 @@
 <script>
 import {computed} from 'vue'
 import {IMG_URL} from '@const/index.js'
+import { replaceDateByT } from '@/utils/time'
 export default {
     props:{
         imgOrder:{
@@ -46,14 +47,9 @@ export default {
     },
 
     setup(props){
-        const replaceDateT = computed(()=>{
-            return (date)=>{
-                return date.replace("T"," ")
-            }
-        })
         return {
             IMG_URL,
-            replaceDateT
+            replaceDateByT
         }
     }
 }

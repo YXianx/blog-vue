@@ -11,7 +11,7 @@
                 <div class="info" style="margin-top:10px">
                     <div>
                         <i class="iconfont">&#xe659;</i>
-                        {{replaceDateT(articleData.createTime)}}
+                        {{replaceDateByT(articleData.createTime)}}
                     </div>
                     <router-link to="/home" >
                         <i class="iconfont">&#xe6aa;</i>
@@ -29,6 +29,7 @@
 <script>
 import {computed} from 'vue'
 import {IMG_URL} from '@const/index.js'
+import { replaceDateByT } from '@/utils/time'
 
 export default {
     props:{
@@ -38,15 +39,9 @@ export default {
         }
     },
     setup(){
-        const replaceDateT = computed(()=>{
-            return (date)=>{
-                return date.replace("T"," ")
-            }
-        })
-
         return{
             IMG_URL,
-            replaceDateT
+            replaceDateByT
         }
     }
 }
