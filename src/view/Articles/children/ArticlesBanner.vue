@@ -2,7 +2,7 @@
     <banner class="banner" 
             height="400px" 
             :isScrollDown="false"
-            :bannerUrl="IMG_URL + 'blog_bg_3.webp'"
+            :bannerUrl="articleDetail.articleCover"
             :backgroundScroll="false"
             :leftTitle="true"
             :resetInfoHeight="true"

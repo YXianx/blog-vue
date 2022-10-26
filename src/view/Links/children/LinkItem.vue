@@ -10,7 +10,7 @@
                     {{linkInfo.linkName}}
                 </a>
             </div>
-            <span>{{replaceDateT(linkInfo.createTime)}}</span>
+            <span>{{replaceDateByT(linkInfo.createTime)}}</span>
             <div class="desc">
                 {{linkInfo.linkIntro}}
             </div>
@@ -36,14 +36,8 @@ export default {
         }
     },
     setup(){
-        const replaceDateT = computed(()=>{
-            return (date)=>{
-                return date.replace("T"," ")
-            }
-        })
-
         return {
-            replaceDateT    
+            replaceDateByT    
         }
     }
 }
