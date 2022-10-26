@@ -4,7 +4,8 @@
             :style="{
                 height: searchData.length ? '430px' : 'auto',
                 top: searchData.length ? '391px' : '202px'
-            }">
+            }"
+        >
             <div class="search">
                 <i class="iconfont">&#xe623;</i>
                 <input
@@ -17,35 +18,52 @@
             <div class="search-list" v-if="searchData.length">
                 <div class="search-module" v-for="moduleItem in searchData">
                     <template v-if="moduleItem.name === '分类' || moduleItem.name === '标签'">
-                        <div class="module-title" v-if="moduleItem.data.length">{{ moduleItem.name }}</div>
-                        <div class="search-item" v-for="contentItem in moduleItem.data" v-if="moduleItem.data.length">
-                            <span class="first-word">{{ contentItem.firstWord }}</span>
-                            <!-- <img class="mini-icon" v-if="contentItem.preViewList" :src="contentItem.preViewList[0].articleCover"> -->
-                            <div class="info">
-                                <div class="name">{{ contentItem.name }}</div>
-                                <div class="count">相关文章: {{ contentItem.articleCount }} 篇</div>
+                            <div class="module-title" v-if="moduleItem.data.length">{{ moduleItem.name }}</div>
+                            <div class="search-item" v-for="contentItem in moduleItem.data" v-if="moduleItem.data.length">
+                                <router-link
+                                    custom
+                                    v-slot="props"
+                                    :to="moduleItem.name === '分类' ? `/categories/${contentItem.id}` : `/tag/${contentItem.id}`"
+                                >
+                                    <div class="item-info" @click="props.navigate">
+                                        <span class="first-word">{{ contentItem.firstWord }}</span>
+                                        <div class="info">
+                                            <div class="name">{{ contentItem.name }} {{ contentItem.id }}</div>
+                                            <div class="count">相关文章: {{ contentItem.articleCount }} 篇</div>
+                                        </div>
+                                    </div>
+                                </router-link>
                             </div>
-                        </div>
                     </template>
 
                     <template v-if="moduleItem.name === '文章'">
                         <div class="module-title" v-if="moduleItem.data.length">{{ moduleItem.name }}</div>
                         <div class="search-item" v-for="contentItem in moduleItem.data" v-if="moduleItem.data.length">
-                            <img class="mini-icon" v-if="contentItem.articleCover" :src="contentItem.articleCover">
-                            <div class="info">
-                                <div class="name">{{ contentItem.articleTitle }}</div>
-                                <div class="time" v-if="contentItem.updateTime">修改于{{ replaceDateByT(contentItem.updateTime) }}</div>
-                            </div>
+                            <router-link
+                                    custom
+                                    v-slot="props"
+                                    :to="`/articles/${contentItem.articleId}`"
+                                >
+                                <div class="item-info" @click="props.navigate">
+                                    <img class="mini-icon" v-if="contentItem.articleCover" :src="contentItem.articleCover">
+                                    <div class="info">
+                                        <div class="name">{{ contentItem.articleTitle }}</div>
+                                        <div class="time" v-if="contentItem.updateTime">修改于{{ replaceDateByT(contentItem.updateTime) }}</div>
+                                    </div>
+                                </div>
+                        </router-link>
                         </div>
                     </template>
 
                     <template v-if="moduleItem.name === '友链'">
                         <div class="module-title" v-if="moduleItem.data.length">{{ moduleItem.name }}</div>
                         <div class="search-item" v-for="contentItem in moduleItem.data" v-if="moduleItem.data.length">
-                            <img class="mini-icon" v-if="contentItem.linkAvatar" :src="contentItem.linkAvatar">
-                            <div class="info">
-                                <div class="name">{{ contentItem.linkName }}</div>
-                            </div>
+                            <a class="item-info" :href="'http://' + contentItem.linkAddress">                                
+                                <img class="mini-icon" v-if="contentItem.linkAvatar" :src="contentItem.linkAvatar">
+                                <div class="info">
+                                    <div class="name">{{ contentItem.linkName }}</div>
+                                </div>
+                            </a>        
                         </div>
                     </template>
                 </div>
@@ -151,6 +169,12 @@ export default {
                     padding: 5px;
                     margin: 10px;
                     border-radius: 6px;
+                    cursor: pointer;
+                    .item-info {
+                        width: 100%;
+                        display: flex;
+                        align-items:flex-end;
+                    }
                     // background-color: red;
                     .mini-icon{
                         width: 18px;
