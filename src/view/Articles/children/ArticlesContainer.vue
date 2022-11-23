@@ -31,7 +31,7 @@
     </div>
 </template>
 <script>
-// TODO:(已解决BUG)评论发布 就当文章没有评论发布第一条评论时，响应式正常，第二条开始发布就会重复上一条的内容，虽然能获取到数量变化for出来，但是内容却是有问题的
+// TODO:传递当前文章对象给页码组件，使得页码组件可以拿到文章的背景图及标题信息
 import {ref} from 'vue'
 import {useStore} from 'vuex'
 import { ElMessage } from 'element-plus'
