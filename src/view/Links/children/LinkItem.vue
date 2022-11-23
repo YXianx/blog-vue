@@ -26,8 +26,8 @@
 </div>
 </template>
 <script>
-import {computed} from 'vue'
-import {IMG_URL} from '@const/index.js'
+import { replaceDateByT } from '@/utils/time'
+
 export default {
     props:{
         linkInfo:{
