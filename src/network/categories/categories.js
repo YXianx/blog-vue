@@ -6,7 +6,7 @@ import yxRequest from '../index'
  */
 export function getCategoryList(){
     return yxRequest.get({
-        url: '/category/list'
+        url: '/admin/category/listPage'
     })
 }
 

@@ -28,7 +28,7 @@ export default {
         const categoryList = ref([])
         getCategoryList()
         .then(res=>{
-            categoryList.value = res.data.data
+            categoryList.value = res.data.data.records
         })
 
         return {
